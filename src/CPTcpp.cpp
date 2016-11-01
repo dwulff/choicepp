@@ -168,16 +168,14 @@ double w_p(double p, double o, double delta_l, double gamma_l, double delta_g, d
 //' \code{w_wrapper} is a wrapper for different parameterizations of the
 //'   weighting function.
 //'
-//'@details
+//' @details
 //' The type argument controls the type of weighting function implemented.
-//'
 //' type = 00x implements the weighting function of Tversky & Kahneman
 //' (1992) with one \code{gamma}.
 //' type = 01x implements the weighting function of Tversky & Kahneman
 //' (1992) with one \code{gamma} for losses and one \code{gamma} for gains.
-//'
 //' type = 10x implements the weighting function of Goldstein & Einhorn
-//' (1987) with one \code{delta and one \code{gamma}.
+//' (1987) with one \code{delta} and one \code{gamma}.
 //' type = 11x implements the weighting function of Goldstein & Einhorn
 //' (1987) with one \code{delta}, one \code{gamma} for losses, and one
 //' \code{gamma} for gains.
@@ -187,7 +185,6 @@ double w_p(double p, double o, double delta_l, double gamma_l, double delta_g, d
 //' type = 13x implements the weighting function of Goldstein & Einhorn
 //' (1987) with one \code{delta} for losses, one \code{delta} for gains,
 //' and one \code{gamma} for losses and one \code{gamma} for gains.
-//'
 //' type = 20x implements the "one"-parameter weighting function of Prelec
 //' (1998) with one \code{gamma}.
 //' type = 21x implements the "one"-parameter weighting function of Prelec

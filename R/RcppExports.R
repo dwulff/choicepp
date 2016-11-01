@@ -28,10 +28,11 @@ v <- function(o, alpha, beta, lambda) {
 #' \code{v_wrapper} is a wrapper for different parameterizations of the value
 #'   function.
 #'
+#' @details
 #' The type argument controls the type of value function implemented.
-#'   - type = xx1 implements only \code{alpha}
-#'   - type = xx2 implements \code{alpha} and \code{beta}
-#'   - type = xx3 implements \code{alpha}, \code{beta}, and \code{lambda}
+#' type = xx1 implements only \code{alpha}
+#' type = xx2 implements \code{alpha} and \code{beta}
+#' type = xx3 implements \code{alpha}, \code{beta}, and \code{lambda}
 #'
 #' @param o numeric specifying the to be transformed outcome.
 #' @param type integer specifying the parameterization of the value function.
@@ -113,40 +114,38 @@ w_p <- function(p, o, delta_l, gamma_l, delta_g, gamma_g) {
 #' \code{w_wrapper} is a wrapper for different parameterizations of the
 #'   weighting function.
 #'
+#' @details
 #' The type argument controls the type of weighting function implemented.
-#'
-#'     type = 00x implements the weighting function of Tversky & Kahneman
-#'     (1992) with one \code{gamma}.
-#'     type = 01x implements the weighting function of Tversky & Kahneman
-#'     (1992) with one \code{gamma} for losses and one \code{gamma} for gains.
-#'
-#'     type = 10x implements the weighting function of Goldstein & Einhorn
-#'     (1987) with one \code{delta and one \code{gamma}.
-#'     type = 11x implements the weighting function of Goldstein & Einhorn
-#'     (1987) with one \code{delta}, one \code{gamma} for losses, and one
-#'     \code{gamma} for gains.
-#'     type = 12x implements the weighting function of Goldstein & Einhorn
-#'     (1987) with one \code{delta} for losses, one \code{delta} for gains,
-#'     and one \code{gamma}.
-#'     type = 13x implements the weighting function of Goldstein & Einhorn
-#'     (1987) with one \code{delta} for losses, one \code{delta} for gains,
-#'     and one \code{gamma} for losses and one \code{gamma} for gains.
-#'
-#'     type = 20x implements the "one"-parameter weighting function of Prelec
-#'     (1998) with one \code{gamma}.
-#'     type = 21x implements the "one"-parameter weighting function of Prelec
-#'     (1998) with one \code{gamma} for losses and one \code{gamma} for gains.
-#'     type = 22x implements the "two"-parameter weighting function of Prelec
-#'     (1998) with one \delta{delta} and one \code{gamma}.
-#'     type = 23x implements the "two"-parameter weighting function of Prelec
-#'     (1998) with one \delta{delta}, one \code{gamma} losses, and one
-#'     \code{gamma} for gains.
-#'     type = 24x implements the "two"-parameter weighting function of Prelec
-#'     (1998) with one \delta{delta} for losses, one \code{delta} gains, and
-#'     one \code{gamma}.
-#'     type = 25x implements the "two"-parameter weighting function of Prelec
-#'     (1998) with one \delta{delta} for losses, one \code{delta} gains, one
-#'     \code{gamma} for losses and one \code{gamma} for gains.
+#' type = 00x implements the weighting function of Tversky & Kahneman
+#' (1992) with one \code{gamma}.
+#' type = 01x implements the weighting function of Tversky & Kahneman
+#' (1992) with one \code{gamma} for losses and one \code{gamma} for gains.
+#' type = 10x implements the weighting function of Goldstein & Einhorn
+#' (1987) with one \code{delta} and one \code{gamma}.
+#' type = 11x implements the weighting function of Goldstein & Einhorn
+#' (1987) with one \code{delta}, one \code{gamma} for losses, and one
+#' \code{gamma} for gains.
+#' type = 12x implements the weighting function of Goldstein & Einhorn
+#' (1987) with one \code{delta} for losses, one \code{delta} for gains,
+#' and one \code{gamma}.
+#' type = 13x implements the weighting function of Goldstein & Einhorn
+#' (1987) with one \code{delta} for losses, one \code{delta} for gains,
+#' and one \code{gamma} for losses and one \code{gamma} for gains.
+#' type = 20x implements the "one"-parameter weighting function of Prelec
+#' (1998) with one \code{gamma}.
+#' type = 21x implements the "one"-parameter weighting function of Prelec
+#' (1998) with one \code{gamma} for losses and one \code{gamma} for gains.
+#' type = 22x implements the "two"-parameter weighting function of Prelec
+#' (1998) with one \delta{delta} and one \code{gamma}.
+#' type = 23x implements the "two"-parameter weighting function of Prelec
+#' (1998) with one \delta{delta}, one \code{gamma} losses, and one
+#' \code{gamma} for gains.
+#' type = 24x implements the "two"-parameter weighting function of Prelec
+#' (1998) with one \delta{delta} for losses, one \code{delta} gains, and
+#' one \code{gamma}.
+#' type = 25x implements the "two"-parameter weighting function of Prelec
+#' (1998) with one \delta{delta} for losses, one \code{delta} gains, one
+#' \code{gamma} for losses and one \code{gamma} for gains.
 #'
 #' @param p numeric specifying the to be transformed probability.
 #' @param o numeric specifying the outcome associated with the probability.
