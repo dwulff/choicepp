@@ -21,8 +21,11 @@ a utility
 }
 \details{
 The type argument controls the type of value function implemented.
+
 type = xx1 implements only \code{alpha}
+
 type = xx2 implements \code{alpha} and \code{beta}
+
 type = xx3 implements \code{alpha}, \code{beta}, and \code{lambda}
 }
 
