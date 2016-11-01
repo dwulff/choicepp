@@ -31,7 +31,9 @@ v <- function(o, alpha, beta, lambda) {
 #' @details
 #' The type argument controls the type of value function implemented.
 #'
-#' xx1 implements only \code{alpha}
+#' xx0 implements only \code{alpha}
+#'
+#' xx1 implements \code{alpha} and \code{lambda}
 #'
 #' xx2 implements \code{alpha} and \code{beta}
 #'
