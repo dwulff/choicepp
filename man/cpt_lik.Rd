@@ -15,7 +15,7 @@ cpt_lik(par, problems, choices, type = 0L, limit = 1e-04)
 0 = A and 0 = B.}
 
 \item{type}{integer specifying the parameterization of the value and
-weighting function. See \link{v_wrapper} and \link{v_wrapper}.}
+weighting function. See \link{v_wrapper} and \link{w_wrapper}.}
 }
 \value{
 a vector of choice probabilities
