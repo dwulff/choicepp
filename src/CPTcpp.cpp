@@ -204,18 +204,18 @@ double w_p(double p, double o, double delta_l, double gamma_l, double delta_g, d
 //' (1998) with one \code{gamma} for losses and one \code{gamma} for gains.
 //'
 //' 22x implements the "two"-parameter weighting function of Prelec
-//' (1998) with one \delta{delta} and one \code{gamma}.
+//' (1998) with one \code{delta} and one \code{gamma}.
 //'
 //' 23x implements the "two"-parameter weighting function of Prelec
-//' (1998) with one \delta{delta}, one \code{gamma} losses, and one
+//' (1998) with one \code{delta}, one \code{gamma} losses, and one
 //' \code{gamma} for gains.
 //'
 //' 24x implements the "two"-parameter weighting function of Prelec
-//' (1998) with one \delta{delta} for losses, one \code{delta} gains, and
+//' (1998) with one \code{delta} for losses, one \code{delta} gains, and
 //' one \code{gamma}.
 //'
 //' 25x implements the "two"-parameter weighting function of Prelec
-//' (1998) with one \delta{delta} for losses, one \code{delta} gains, one
+//' (1998) with one \code{delta} for losses, one \code{delta} gains, one
 //' \code{gamma} for losses and one \code{gamma} for gains.
 //'
 //' @param p numeric specifying the to be transformed probability.

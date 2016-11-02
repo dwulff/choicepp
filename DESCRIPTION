@@ -8,6 +8,7 @@ Maintainer: Dirk U. Wulff <dirk.wulff@gmail.com>
 Description: The package implements common models of binary risky choice and
     helper functions in c++ for fast simulations and fitting.
 License: GPL (>= 2)
+Depends: Rcpp (>= 0.12.5)
 Imports:
     Rcpp (>= 0.12.5)
 LinkingTo: Rcpp
