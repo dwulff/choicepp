@@ -7,6 +7,9 @@
 v(o, alpha, beta, lambda)
 }
 \arguments{
+\item{o}{numeric specifying the magnitude of the to be transformed
+outcome}
+
 \item{alpha}{numeric specifying the exponent of the utility function for
 the gain domain.}
 
@@ -15,9 +18,6 @@ the loss domain.}
 
 \item{lambda}{numeric specifying the slope of the utility function for
 the loss domain relative to the gain domain.}
-
-\item{out}{numeric specifying the magnitude of the to be transformed
-outcome}
 }
 \value{
 a utility
@@ -25,6 +25,5 @@ a utility
 \description{
 \code{v}, being the standard value function, transforms the magnitute of
   an outcome into utility space
-  jk
 }
 
