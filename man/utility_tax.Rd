@@ -13,7 +13,7 @@ that is ordered according to max_loss, min_loss, max_gain, min_gain, and
 whose last entry indicates the number of loss outcomes.}
 
 \item{par}{numeric vector specifying the parameters of the CPT model. See
-\link{u}, \link{t}, and \link{w}.}
+\link{u}, \link{t_tax}, and \link{w}.}
 
 \item{type}{integer specifying the parameterization of TAX.
 \code{type = 1} is the one parameter TAX with just a \code{gamma}

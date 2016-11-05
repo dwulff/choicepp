@@ -45,7 +45,7 @@ double u(double o,  double alpha){
 //'
 //' @export
 // [[Rcpp::export]]
-double t(double p, double gamma){
+double t_tax(double p, double gamma){
   return pow(std::abs(p), gamma);
   }
 
@@ -53,14 +53,14 @@ double t(double p, double gamma){
 //////////////////////////////////////////////////////////////////////////////
 //' Transfer function of TAX
 //'
-//' \code{t} is the weighting function proposed by Tverksy & Kahneman
+//' \code{t_tax} is the weighting function proposed by Tverksy & Kahneman
 //'   (1992). It transforms probabilities into decision weights.
 //'
 //' @param pi numeric specifying the to be transformed probability at i.
 //' @param pk numeric specifying the to be transformed probability at k.
 //' @param delta numeric specifying the transfer factor.
 //' @param gamma numeric specifying the exponential factor (sensitivity) of
-//'   the probability weighting function. See \link{t}.
+//'   the probability weighting function. See \link{t_tax}.
 //'
 //' @return a transfer weight
 //'
@@ -70,8 +70,8 @@ double t(double p, double gamma){
 //' @export
 // [[Rcpp::export]]
 double w(double pi, double pk, double delta, double gamma, double n){
-  if(delta < 0) return (delta*t(pk,gamma))/(n+1);
-  else return (delta*t(pk,gamma))/(n+1);
+  if(delta < 0) return (delta*t_tax(pk,gamma))/(n+1);
+  else return (delta*t_tax(pk,gamma))/(n+1);
   return 0;
   }
 
@@ -86,7 +86,7 @@ double w(double pi, double pk, double delta, double gamma, double n){
 //'   that is ordered according to max_loss, min_loss, max_gain, min_gain, and
 //'   whose last entry indicates the number of loss outcomes.
 //' @param par numeric vector specifying the parameters of the CPT model. See
-//'   \link{u}, \link{t}, and \link{w}.
+//'   \link{u}, \link{t_tax}, and \link{w}.
 //' @param type integer specifying the parameterization of TAX.
 //'   \code{type = 1} is the one parameter TAX with just a \code{gamma}
 //'   parameter. \code{type = 2} is the two parameter TAX with a \code{gamma}
@@ -108,8 +108,8 @@ double utility_tax(NumericVector opt, std::vector<double> par, int type){
   if(type == 0){
     for(int i = 0; i < no; i++){
       uxi = opt[i];
-      nom += uxi * t(opt[i + no],par[0]);
-      den += t(opt[i + no],par[0]);
+      nom += uxi * t_tax(opt[i + no],par[0]);
+      den += t_tax(opt[i + no],par[0]);
       for(int k = 0; k < i; k++){
         nom += (uxi - opt[k]) * w(opt[i + no],opt[k + no],1,par[0],double(no));
         }
@@ -118,8 +118,8 @@ double utility_tax(NumericVector opt, std::vector<double> par, int type){
   if(type == 1){
     for(int i = 0; i < no; i++){
       uxi = u(opt[i],par[0]);
-      nom += uxi * t(opt[i + no],par[1]);
-      den += t(opt[i + no],par[1]);
+      nom += uxi * t_tax(opt[i + no],par[1]);
+      den += t_tax(opt[i + no],par[1]);
       for(int k = 0; k < i; k++){
         nom += (uxi - u(opt[k],par[0])) * w(opt[i + no],opt[k + no],1,par[1],double(no));
         }
@@ -128,8 +128,8 @@ double utility_tax(NumericVector opt, std::vector<double> par, int type){
   if(type == 2){
     for(int i = 0; i < no; i++){
       uxi = opt[i];
-      nom += uxi * t(opt[i + no],par[0]);
-      den += t(opt[i + no],par[0]);
+      nom += uxi * t_tax(opt[i + no],par[0]);
+      den += t_tax(opt[i + no],par[0]);
       for(int k = 0; k < i; k++){
         nom += (uxi - opt[k]) * w(opt[i + no],opt[k + no],par[1],par[0],double(no));
         }
@@ -138,8 +138,8 @@ double utility_tax(NumericVector opt, std::vector<double> par, int type){
   if(type == 3){
     for(int i = 0; i < no; i++){
       uxi = u(opt[i],par[0]);
-      nom += uxi * t(opt[i + no],par[1]);
-      den += t(opt[i + no],par[1]);
+      nom += uxi * t_tax(opt[i + no],par[1]);
+      den += t_tax(opt[i + no],par[1]);
       for(int k = 0; k < i; k++){
         nom += (uxi - u(opt[k],par[0])) * w(opt[i + no],opt[k + no],par[2],par[1],double(no));
         }

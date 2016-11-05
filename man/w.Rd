@@ -14,13 +14,13 @@ w(pi, pk, delta, gamma, n)
 \item{delta}{numeric specifying the transfer factor.}
 
 \item{gamma}{numeric specifying the exponential factor (sensitivity) of
-the probability weighting function. See \link{t}.}
+the probability weighting function. See \link{t_tax}.}
 }
 \value{
 a transfer weight
 }
 \description{
-\code{t} is the weighting function proposed by Tverksy & Kahneman
+\code{t_tax} is the weighting function proposed by Tverksy & Kahneman
   (1992). It transforms probabilities into decision weights.
 }
 \references{

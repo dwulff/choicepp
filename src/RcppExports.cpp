@@ -313,15 +313,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// t
-double t(double p, double gamma);
-RcppExport SEXP choicepp_t(SEXP pSEXP, SEXP gammaSEXP) {
+// t_tax
+double t_tax(double p, double gamma);
+RcppExport SEXP choicepp_t_tax(SEXP pSEXP, SEXP gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
     Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
-    rcpp_result_gen = Rcpp::wrap(t(p, gamma));
+    rcpp_result_gen = Rcpp::wrap(t_tax(p, gamma));
     return rcpp_result_gen;
 END_RCPP
 }

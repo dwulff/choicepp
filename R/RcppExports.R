@@ -433,20 +433,20 @@ u <- function(o, alpha) {
 #'   decision making on the Internet. Psychological Science, 10(5), 399-407.
 #'
 #' @export
-t <- function(p, gamma) {
-    .Call('choicepp_t', PACKAGE = 'choicepp', p, gamma)
+t_tax <- function(p, gamma) {
+    .Call('choicepp_t_tax', PACKAGE = 'choicepp', p, gamma)
 }
 
 #' Transfer function of TAX
 #'
-#' \code{t} is the weighting function proposed by Tverksy & Kahneman
+#' \code{t_tax} is the weighting function proposed by Tverksy & Kahneman
 #'   (1992). It transforms probabilities into decision weights.
 #'
 #' @param pi numeric specifying the to be transformed probability at i.
 #' @param pk numeric specifying the to be transformed probability at k.
 #' @param delta numeric specifying the transfer factor.
 #' @param gamma numeric specifying the exponential factor (sensitivity) of
-#'   the probability weighting function. See \link{t}.
+#'   the probability weighting function. See \link{t_tax}.
 #'
 #' @return a transfer weight
 #'
@@ -468,7 +468,7 @@ w <- function(pi, pk, delta, gamma, n) {
 #'   that is ordered according to max_loss, min_loss, max_gain, min_gain, and
 #'   whose last entry indicates the number of loss outcomes.
 #' @param par numeric vector specifying the parameters of the CPT model. See
-#'   \link{u}, \link{t}, and \link{w}.
+#'   \link{u}, \link{t_tax}, and \link{w}.
 #' @param type integer specifying the parameterization of TAX.
 #'   \code{type = 1} is the one parameter TAX with just a \code{gamma}
 #'   parameter. \code{type = 2} is the two parameter TAX with a \code{gamma}
