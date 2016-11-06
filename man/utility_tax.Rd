@@ -4,7 +4,7 @@
 \alias{utility_tax}
 \title{Utility function of TAX}
 \usage{
-utility_tax(opt, par, type)
+utility_tax(opt, par, type = 1L)
 }
 \arguments{
 \item{opt}{numeric vector specifying the outcomes and probabilities of an
@@ -16,10 +16,10 @@ whose last entry indicates the number of loss outcomes.}
 \link{u}, \link{t_tax}, and \link{w}.}
 
 \item{type}{integer specifying the parameterization of TAX.
-\code{type = 1} is the one parameter TAX with just a \code{gamma}
-parameter. \code{type = 2} is the two parameter TAX with a \code{gamma}
+\code{type = 0} is the one parameter TAX with just a \code{gamma}
+parameter. \code{type = 1} is the two parameter TAX with a \code{gamma}
 and a \code{alpha} parameter. \code{type = 2} is the two parameter TAX
-with a \code{gamma} and a \code{delta} parameter. \code{type = 2} is the
+with a \code{gamma} and a \code{delta} parameter. \code{type = 3} is the
 three parameter TAX with a \code{gamma}, a \code{alpha}, and a
 \code{delta} parameter.}
 }

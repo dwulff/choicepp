@@ -470,10 +470,10 @@ w <- function(pi, pk, delta, gamma, n) {
 #' @param par numeric vector specifying the parameters of the CPT model. See
 #'   \link{u}, \link{t_tax}, and \link{w}.
 #' @param type integer specifying the parameterization of TAX.
-#'   \code{type = 1} is the one parameter TAX with just a \code{gamma}
-#'   parameter. \code{type = 2} is the two parameter TAX with a \code{gamma}
+#'   \code{type = 0} is the one parameter TAX with just a \code{gamma}
+#'   parameter. \code{type = 1} is the two parameter TAX with a \code{gamma}
 #'   and a \code{alpha} parameter. \code{type = 2} is the two parameter TAX
-#'   with a \code{gamma} and a \code{delta} parameter. \code{type = 2} is the
+#'   with a \code{gamma} and a \code{delta} parameter. \code{type = 3} is the
 #'   three parameter TAX with a \code{gamma}, a \code{alpha}, and a
 #'   \code{delta} parameter.
 #'
@@ -483,7 +483,7 @@ w <- function(pi, pk, delta, gamma, n) {
 #'   decision making on the Internet. Psychological Science, 10(5), 399-407.
 #'
 #' @export
-utility_tax <- function(opt, par, type) {
+utility_tax <- function(opt, par, type = 1L) {
     .Call('choicepp_utility_tax', PACKAGE = 'choicepp', opt, par, type)
 }
 

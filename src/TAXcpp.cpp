@@ -88,10 +88,10 @@ double w(double pi, double pk, double delta, double gamma, double n){
 //' @param par numeric vector specifying the parameters of the CPT model. See
 //'   \link{u}, \link{t_tax}, and \link{w}.
 //' @param type integer specifying the parameterization of TAX.
-//'   \code{type = 1} is the one parameter TAX with just a \code{gamma}
-//'   parameter. \code{type = 2} is the two parameter TAX with a \code{gamma}
+//'   \code{type = 0} is the one parameter TAX with just a \code{gamma}
+//'   parameter. \code{type = 1} is the two parameter TAX with a \code{gamma}
 //'   and a \code{alpha} parameter. \code{type = 2} is the two parameter TAX
-//'   with a \code{gamma} and a \code{delta} parameter. \code{type = 2} is the
+//'   with a \code{gamma} and a \code{delta} parameter. \code{type = 3} is the
 //'   three parameter TAX with a \code{gamma}, a \code{alpha}, and a
 //'   \code{delta} parameter.
 //'
@@ -102,7 +102,7 @@ double w(double pi, double pk, double delta, double gamma, double n){
 //'
 //' @export
 // [[Rcpp::export]]
-double utility_tax(NumericVector opt, std::vector<double> par, int type){
+double utility_tax(NumericVector opt, std::vector<double> par, int type = 1){
   int no = (opt.size() - 1)/2;
   double uxi, nom = 0, den = 0;
   if(type == 0){
