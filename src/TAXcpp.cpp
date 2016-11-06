@@ -31,8 +31,7 @@ double u(double o,  double alpha){
 //////////////////////////////////////////////////////////////////////////////
 //' Weighting function of TAX
 //'
-//' \code{t} is the weighting function proposed by Tverksy & Kahneman
-//'   (1992). It transforms probabilities into decision weights.
+//' \code{t_tax} is the weighting function of TAX.
 //'
 //' @param p numeric specifying the to be transformed probability.
 //' @param gamma numeric specifying the exponential factor
@@ -53,8 +52,7 @@ double t_tax(double p, double gamma){
 //////////////////////////////////////////////////////////////////////////////
 //' Transfer function of TAX
 //'
-//' \code{t_tax} is the weighting function proposed by Tverksy & Kahneman
-//'   (1992). It transforms probabilities into decision weights.
+//' \code{w} is the transfer function of TAX.
 //'
 //' @param pi numeric specifying the to be transformed probability at i.
 //' @param pk numeric specifying the to be transformed probability at k.
@@ -78,8 +76,8 @@ double w(double pi, double pk, double delta, double gamma, double n){
 //////////////////////////////////////////////////////////////////////////////
 //' Utility function of TAX
 //'
-//' \code{t} is the weighting function proposed by Tverksy & Kahneman
-//'   (1992). It transforms probabilities into decision weights.
+//' \code{utility_tax} is the utility function of TAX, producing utility
+//'   values for choice options absed on a given set of parameters.
 //'
 //' @param opt numeric vector specifying the outcomes and probabilities of an
 //'   option. The function expects a length of (number of outcomes * 2 + 1),
