@@ -102,7 +102,7 @@ double w(double pi, double pk, double delta, double gamma, double n){
 //'
 //' @export
 // [[Rcpp::export]]
-double utility_tax(NumericVector opt, std::vector<double> par, int type = 1){
+double utility_tax(NumericVector opt, std::vector<double> par, int type){
   int no = (opt.size() - 1)/2;
   double uxi, nom = 0, den = 0;
   if(type == 0){
@@ -171,7 +171,7 @@ double utility_tax(NumericVector opt, std::vector<double> par, int type = 1){
 // [[Rcpp::export]]
 std::vector<double> tax_prob(std::vector<double> par,
                              GenericVector problems,
-                             int type = 0){
+                             int type = 1){
   NumericMatrix As = problems[0], Bs = problems[1];
   int i, n = As.nrow();
   double utA, utB;
@@ -207,7 +207,7 @@ std::vector<double> tax_prob(std::vector<double> par,
 double tax_lik(std::vector<double> par,
                GenericVector problems,
                std::vector<int> choices,
-               int type = 000,
+               int type = 1,
                double limit = .0001){
   int choice;
   double pA, llik = 0;
@@ -244,7 +244,7 @@ double tax_lik(std::vector<double> par,
 // [[Rcpp::export]]
 std::vector<int> tax_choice(std::vector<double> par,
                             GenericVector problems,
-                            int type = 000){
+                            int type = 1){
   NumericMatrix As = problems[0], Bs = problems[1];
   int i, n = As.nrow();
   double utA, utB, r;
@@ -292,7 +292,7 @@ std::vector<int> tax_choice(std::vector<double> par,
 // [[Rcpp::export]]
 std::vector<int> tax_rndchoice(std::vector<double> par,
                                GenericVector problems,
-                               int type = 000){
+                               int type = 1){
   double r, pA;
   std::vector<double> probs = tax_prob(par,problems,type);
   std::vector<int> choices;
