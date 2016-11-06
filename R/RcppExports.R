@@ -420,8 +420,7 @@ u <- function(o, alpha) {
 
 #' Weighting function of TAX
 #'
-#' \code{t} is the weighting function proposed by Tverksy & Kahneman
-#'   (1992). It transforms probabilities into decision weights.
+#' \code{t_tax} is the weighting function of TAX.
 #'
 #' @param p numeric specifying the to be transformed probability.
 #' @param gamma numeric specifying the exponential factor
@@ -439,8 +438,7 @@ t_tax <- function(p, gamma) {
 
 #' Transfer function of TAX
 #'
-#' \code{t_tax} is the weighting function proposed by Tverksy & Kahneman
-#'   (1992). It transforms probabilities into decision weights.
+#' \code{w} is the transfer function of TAX.
 #'
 #' @param pi numeric specifying the to be transformed probability at i.
 #' @param pk numeric specifying the to be transformed probability at k.
@@ -460,8 +458,8 @@ w <- function(pi, pk, delta, gamma, n) {
 
 #' Utility function of TAX
 #'
-#' \code{t} is the weighting function proposed by Tverksy & Kahneman
-#'   (1992). It transforms probabilities into decision weights.
+#' \code{utility_tax} is the utility function of TAX, producing utility
+#'   values for choice options absed on a given set of parameters.
 #'
 #' @param opt numeric vector specifying the outcomes and probabilities of an
 #'   option. The function expects a length of (number of outcomes * 2 + 1),
@@ -483,7 +481,7 @@ w <- function(pi, pk, delta, gamma, n) {
 #'   decision making on the Internet. Psychological Science, 10(5), 399-407.
 #'
 #' @export
-utility_tax <- function(opt, par, type = 1L) {
+utility_tax <- function(opt, par, type) {
     .Call('choicepp_utility_tax', PACKAGE = 'choicepp', opt, par, type)
 }
 
@@ -500,7 +498,7 @@ utility_tax <- function(opt, par, type = 1L) {
 #' @return a vector of choice probabilities
 #'
 #' @export
-tax_prob <- function(par, problems, type = 0L) {
+tax_prob <- function(par, problems, type = 1L) {
     .Call('choicepp_tax_prob', PACKAGE = 'choicepp', par, problems, type)
 }
 
@@ -519,7 +517,7 @@ tax_prob <- function(par, problems, type = 0L) {
 #' @return a vector of choice probabilities
 #'
 #' @export
-tax_lik <- function(par, problems, choices, type = 000L, limit = .0001) {
+tax_lik <- function(par, problems, choices, type = 1L, limit = .0001) {
     .Call('choicepp_tax_lik', PACKAGE = 'choicepp', par, problems, choices, type, limit)
 }
 
@@ -536,7 +534,7 @@ tax_lik <- function(par, problems, choices, type = 000L, limit = .0001) {
 #' @return a vector of choices
 #'
 #' @export
-tax_choice <- function(par, problems, type = 000L) {
+tax_choice <- function(par, problems, type = 1L) {
     .Call('choicepp_tax_choice', PACKAGE = 'choicepp', par, problems, type)
 }
 
@@ -553,7 +551,7 @@ tax_choice <- function(par, problems, type = 000L) {
 #' @return a vector of choices
 #'
 #' @export
-tax_rndchoice <- function(par, problems, type = 000L) {
+tax_rndchoice <- function(par, problems, type = 1L) {
     .Call('choicepp_tax_rndchoice', PACKAGE = 'choicepp', par, problems, type)
 }
 

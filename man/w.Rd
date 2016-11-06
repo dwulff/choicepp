@@ -20,8 +20,7 @@ the probability weighting function. See \link{t_tax}.}
 a transfer weight
 }
 \description{
-\code{t_tax} is the weighting function proposed by Tverksy & Kahneman
-  (1992). It transforms probabilities into decision weights.
+\code{w} is the transfer function of TAX.
 }
 \references{
 Birnbaum, M. H. (1999). Testing critical properties of

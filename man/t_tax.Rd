@@ -16,8 +16,7 @@ t_tax(p, gamma)
 a decision weight
 }
 \description{
-\code{t} is the weighting function proposed by Tverksy & Kahneman
-  (1992). It transforms probabilities into decision weights.
+\code{t_tax} is the weighting function of TAX.
 }
 \references{
 Birnbaum, M. H. (1999). Testing critical properties of

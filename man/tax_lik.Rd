@@ -4,7 +4,7 @@
 \alias{tax_lik}
 \title{TAX-based likelihood}
 \usage{
-tax_lik(par, problems, choices, type = 0L, limit = 1e-04)
+tax_lik(par, problems, choices, type = 1L, limit = 1e-04)
 }
 \arguments{
 \item{par}{numeric vector specifying the parameters of the TAX model.}

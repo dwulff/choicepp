@@ -4,7 +4,7 @@
 \alias{tax_choice}
 \title{TAX-based deterministic choices}
 \usage{
-tax_choice(par, problems, type = 0L)
+tax_choice(par, problems, type = 1L)
 }
 \arguments{
 \item{par}{numeric vector specifying the parameters of the CPT model.}

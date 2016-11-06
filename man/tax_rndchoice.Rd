@@ -4,7 +4,7 @@
 \alias{tax_rndchoice}
 \title{TAX-based probabilistic choices}
 \usage{
-tax_rndchoice(par, problems, type = 0L)
+tax_rndchoice(par, problems, type = 1L)
 }
 \arguments{
 \item{par}{numeric vector specifying the parameters of the CPT model.}

@@ -4,7 +4,7 @@
 \alias{tax_prob}
 \title{TAX-based choice probabilities}
 \usage{
-tax_prob(par, problems, type = 0L)
+tax_prob(par, problems, type = 1L)
 }
 \arguments{
 \item{par}{numeric vector specifying the parameters of the TAX model.}

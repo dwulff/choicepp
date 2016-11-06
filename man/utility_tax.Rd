@@ -4,7 +4,7 @@
 \alias{utility_tax}
 \title{Utility function of TAX}
 \usage{
-utility_tax(opt, par, type = 1L)
+utility_tax(opt, par, type)
 }
 \arguments{
 \item{opt}{numeric vector specifying the outcomes and probabilities of an
@@ -27,8 +27,8 @@ three parameter TAX with a \code{gamma}, a \code{alpha}, and a
 a utility
 }
 \description{
-\code{t} is the weighting function proposed by Tverksy & Kahneman
-  (1992). It transforms probabilities into decision weights.
+\code{utility_tax} is the utility function of TAX, producing utility
+  values for choice options absed on a given set of parameters.
 }
 \references{
 Birnbaum, M. H. (1999). Testing critical properties of
