@@ -1,7 +1,10 @@
 #include <Rcpp.h>
-#include<unordered_map>
+#include <tr1/unordered_map>
 #include "helpers.h"
 using namespace Rcpp;
+using namespace std::tr1;
+
+//#include<unordered_map>
 
 //////////////////////////////////////////////////////////////////////////////
 //
