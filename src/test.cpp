@@ -1,59 +1,17 @@
-#ifndef __UTILITIES__
-#define __UTILITIES__
+#include <Rcpp.h>
+using namespace Rcpp;
 
 
-inline bool cmp(double a, double b){
-  return std::abs(a) > std::abs(b);
-  }
-
-inline double rnf(int a = 0, int b = 1){
-  double r = double(std::rand()) / RAND_MAX;
-  if(a == 0 && b == 1) return r;
-  return r * (b - a) + a;
-}
-
-inline std::vector<int> sq(int len, int start = 0){
-  int i;
-  std::vector<int> sequence;
-  for(i = start; i < len; i++) sequence.push_back(i);
-  return sequence;
-}
-
-
-inline std::vector<double> nrnf(int n, int a = 0, int b = 1, bool norm = true){
-  int i;
-  double r;
-  std::vector<double> rs, rsn;
-  for(i = 0; i < n; i++){
-    r = double(std::rand()) / RAND_MAX;
-    rs.push_back(r * (b - a) + a);
-  }
-  if(norm){
-    double sm = 0;
-    for(i = 0; i < n; i++){
-      sm += rs[i];
-    }
-    for(i = 0; i < n; i++){
-      rsn.push_back(rs[i] / sm);
-    }
-    return rsn;
-  }
-  return rs;
-}
-
-
-inline std::vector<double> cump(std::vector<double> ps){
+// [[Rcpp::export]]
+std::vector<double> cump_test(std::vector<double> ps){
   int i, n = ps.size();
   double cum = 0;
   std::vector<double> cump;
   for(i = 0; i < n; i++){
     cum += ps[i];
-    if(cum > 1.0){
-      cump.push_back(1.0);
-      } else {
-      cump.push_back(cum);
-      }
-    }
+    cump.push_back(cum);
+  }
+  if(cump.back() > 1.0) cump[i - 1] = 1.0;
   return cump;
 }
 
@@ -94,7 +52,9 @@ inline std::vector<int> sort_index(std::vector<double> o, bool decreasing = true
   return order;
   }
 
-inline std::vector<double> arrange(std::vector<double> opt){
+
+// [[Rcpp::export]]
+std::vector<double> arrange(std::vector<double> opt){
   int i, n = opt.size(), outn = opt.size() / 2;
   std::pair<double, double> event;
   std::vector< std::pair<double, double> > plus, minus;
@@ -124,29 +84,3 @@ inline std::vector<double> arrange(std::vector<double> opt){
   all.push_back(minus.size());
   return all;
 }
-
-//////////////////////////////////////////////////////////////////////////////
-//
-//    CHOICE RULE
-//
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-////' Exponential choice rule
-////'
-////' \code{choice_rule} calculates the probability of choosing A using an ex-
-////'   ponential choice rule.
-////'
-////' @param utA numeric specifying the utility of option A
-////' @param utB numeric specifying the utility of option B
-////' @param phi numeric specifying the choice sensitivity
-////'
-////' @return a choice probability
-////'
-////' @export
-//// [[Rcpp::export]]
-inline double choice_rule(double utA, double utB, double phi){
-  return 1 / (1 + exp(phi * (utB - utA)));
-  }
-
-
-#endif // __UTILITIES__
