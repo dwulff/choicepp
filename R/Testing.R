@@ -1,8 +1,8 @@
 
-require(Rcpp)
-# sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/environments.cpp')
-sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/CPTcpp.cpp')
-sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/sample.cpp')
+# require(Rcpp)
+# # sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/environments.cpp')
+# sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/CPTcpp.cpp')
+# sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/sample.cpp')
 #
 #
 #
