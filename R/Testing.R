@@ -4,6 +4,10 @@
 # sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/CPTcpp.cpp')
 # sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/sample.cpp')
 #
+# edit2(c(2,2),c(2,2,.8,.2))
+#
+
+#
 #
 #
 # prob = pgen_rnd(c(1000,1000,1000),2,2,ecological = FALSE,stdom1_test = TRUE, stdom2_test = TRUE,d_crit = .1)

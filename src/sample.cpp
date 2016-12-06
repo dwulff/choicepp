@@ -43,9 +43,9 @@ std::vector<double> edit2(std::vector<double> ss, NumericVector opt){
   for(int i = 0; i < ss.size(); i++){
     double o = ss[i];
     tab[o] += unit;
-  }
+    }
   int add = 0;
-  if(no * 2 > tab.size()) add = no * 2 - tab.size();
+  if(no > tab.size()) add = no - tab.size();
   std::vector<double> ed_opt;
   std::map<double, double>::const_iterator it;
   for(it = tab.begin(); it != tab.end(); ++it) ed_opt.push_back(it->first);
