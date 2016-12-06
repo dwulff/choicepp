@@ -374,6 +374,29 @@ double utility(NumericVector opt, std::vector<double> par, int type){
   return ut;
   }
 
+//////////////////////////////////////////////////////////////////////////////
+//
+//    CHOICE RULE
+//
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//' Exponential choice rule
+//'
+//' \code{choice_rule} calculates the probability of choosing A using an ex-
+//'   ponential choice rule.
+//'
+//' @param utA numeric specifying the utility of option A
+//' @param utB numeric specifying the utility of option B
+//' @param phi numeric specifying the choice sensitivity
+//'
+//' @return a choice probability
+//'
+//' @export
+// [[Rcpp::export]]
+double choice_rule(double utA, double utB, double phi){
+  return 1 / (1 + exp(phi * (utB - utA)));
+  }
+
 
 //////////////////////////////////////////////////////////////////////////////
 //

@@ -198,6 +198,22 @@ utility <- function(opt, par, type) {
     .Call('choicepp_utility', PACKAGE = 'choicepp', opt, par, type)
 }
 
+#' Exponential choice rule
+#'
+#' \code{choice_rule} calculates the probability of choosing A using an ex-
+#'   ponential choice rule.
+#'
+#' @param utA numeric specifying the utility of option A
+#' @param utB numeric specifying the utility of option B
+#' @param phi numeric specifying the choice sensitivity
+#'
+#' @return a choice probability
+#'
+#' @export
+choice_rule <- function(utA, utB, phi) {
+    .Call('choicepp_choice_rule', PACKAGE = 'choicepp', utA, utB, phi)
+}
+
 #' CPT-based choice probabilities
 #'
 #' \code{cpt_prob} computes for a set of choice problems and a set of
@@ -418,12 +434,8 @@ sampl_n <- function(prob, ns) {
     .Call('choicepp_sampl_n', PACKAGE = 'choicepp', prob, ns)
 }
 
-ut <- function(opt, alpha = 1, beta = 1, lambda = 1) {
-    .Call('choicepp_ut', PACKAGE = 'choicepp', opt, alpha, beta, lambda)
-}
-
-smpl_swe <- function(a, b, alpha, lambda, phi) {
-    .Call('choicepp_smpl_swe', PACKAGE = 'choicepp', a, b, alpha, lambda, phi)
+smpl_swe <- function(a, b, phi, par, type) {
+    .Call('choicepp_smpl_swe', PACKAGE = 'choicepp', a, b, phi, par, type)
 }
 
 #' Sample using a stop when easy rule
@@ -437,17 +449,16 @@ smpl_swe <- function(a, b, alpha, lambda, phi) {
 #'   problems in the set.
 #' @param phi a numeric specifying the sensitivity to the difference in
 #'   option utilities.
-#' @param alpha a numeric specifiying the shape of the diminishing return
-#'   curve of the outcome value function.
-#' @param lambda a numeric specifiying the degree of asymmetry between the
-#'   gain and loss value functions.
+#' @param par a numeric vector to be passed on to \link{utility}.
+#' @param type an integer to be passed on to \link{utility}.
+#'
 #'
 #' @return a list of witch each element containing the samples for option
 #'   A, the samples for option B, and the choice.
 #'
 #' @export
-sampl_swe <- function(prob, phi, alpha = 1, lambda = 1) {
-    .Call('choicepp_sampl_swe', PACKAGE = 'choicepp', prob, phi, alpha, lambda)
+sampl_swe <- function(prob, phi, par, type) {
+    .Call('choicepp_sampl_swe', PACKAGE = 'choicepp', prob, phi, par, type)
 }
 
 smpl_sure <- function(a, b, gamma_eq, gamma_uneq) {

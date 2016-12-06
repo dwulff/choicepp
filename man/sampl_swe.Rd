@@ -4,7 +4,7 @@
 \alias{sampl_swe}
 \title{Sample using a stop when easy rule}
 \usage{
-sampl_swe(prob, phi, alpha = 1, lambda = 1)
+sampl_swe(prob, phi, par, type)
 }
 \arguments{
 \item{prob}{a problem table as produced by \link{p_arrange}.}
@@ -12,11 +12,9 @@ sampl_swe(prob, phi, alpha = 1, lambda = 1)
 \item{phi}{a numeric specifying the sensitivity to the difference in
 option utilities.}
 
-\item{alpha}{a numeric specifiying the shape of the diminishing return
-curve of the outcome value function.}
+\item{par}{a numeric vector to be passed on to \link{utility}.}
 
-\item{lambda}{a numeric specifiying the degree of asymmetry between the
-gain and loss value functions.}
+\item{type}{an integer to be passed on to \link{utility}.}
 
 \item{ns}{numceric vector whose length is either one or the number of
 problems in the set.}

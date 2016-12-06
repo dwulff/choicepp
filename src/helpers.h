@@ -2,23 +2,44 @@
 #define __UTILITIES__
 
 
-inline bool cmp(double a, double b){
-  return std::abs(a) > std::abs(b);
-  }
 
-inline double rnf(int a = 0, int b = 1){
-  double r = double(std::rand()) / RAND_MAX;
-  if(a == 0 && b == 1) return r;
-  return r * (b - a) + a;
-}
+//////////////////////////////////////////////////////////////////////////////
+//
+//    CPT FUNS
+//
+//////////////////////////////////////////////////////////////////////////////
+
+double choice_rule(double utA, double utB, double phi);
+
+double v(double o,  double alpha, double beta, double lambda);
+double v_wrapper(double o, std::vector<double> par, int type);
+double w_tk(double p, double o, double gamma_l, double gamma_g);
+double w_ge(double p, double o, double delta_l, double delta_g, double gamma_l, double gamma_g);
+double w_p(double p, double o, double delta_l, double gamma_l, double delta_g, double gamma_g);
+double w_wrapper(double p, double o, std::vector<double> par, int type);
+double utility(Rcpp::NumericVector opt, std::vector<double> par, int type);
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//    UTILITIES
+//
+//////////////////////////////////////////////////////////////////////////////
+
 
 inline std::vector<int> sq(int len, int start = 0){
   int i;
   std::vector<int> sequence;
   for(i = start; i < len; i++) sequence.push_back(i);
   return sequence;
-}
+  }
 
+inline double rnf(int a = 0, int b = 1){
+  double r = double(std::rand()) / RAND_MAX;
+  if(a == 0 && b == 1) return r;
+  return r * (b - a) + a;
+  }
 
 inline std::vector<double> nrnf(int n, int a = 0, int b = 1, bool norm = true){
   int i;
@@ -58,6 +79,17 @@ inline std::vector<double> cump(std::vector<double> ps){
 }
 
 
+//////////////////////////////////////////////////////////////////////////////
+//
+//    SORT
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+inline bool cmp(double a, double b){
+  return std::abs(a) > std::abs(b);
+  }
+
 inline bool incrCompare(const std::pair<double, double>& firstElem, const std::pair<double, double>& secondElem) {
   return firstElem.first < secondElem.first;
   }
@@ -78,6 +110,14 @@ inline std::vector< std::pair<double, int> > mysort2(std::vector< std::pair<doub
   return pairs;
 }
 
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//    SORT PROBLEMS
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
 inline std::vector<int> sort_index(std::vector<double> o, bool decreasing = true){
   std::vector< std::pair<double, int> > outcomes;
   std::pair<double, int> outcome;
@@ -86,7 +126,7 @@ inline std::vector<int> sort_index(std::vector<double> o, bool decreasing = true
     outcome.first  = std::abs(o[i]);
     outcome.second = i;
     outcomes.push_back(outcome);
-    }
+  }
   outcomes = mysort2(outcomes, decreasing);
   std::vector< std::pair<double, int> >::const_iterator it;
   std::vector<int> order;
@@ -104,49 +144,27 @@ inline std::vector<double> arrange(std::vector<double> opt){
     event.second = opt[i + outn];
     if(opt[i] > 0){
       plus.push_back(event);
-    } else {
+      } else {
       minus.push_back(event);
+      }
     }
-  }
   plus  = mysort(plus,true);
   minus = mysort(minus,false);
   std::vector< std::pair<double, double> >::const_iterator it;
   for (it = minus.begin(); it != minus.end(); ++it){
     os.push_back(it->first);
     ps.push_back(it->second);
-  }
+    }
   for (it = plus.begin(); it != plus.end(); ++it){
     os.push_back(it->first);
     ps.push_back(it->second);
-  }
+    }
   all.insert(all.end(), os.begin(), os.end());
   all.insert(all.end(), ps.begin(), ps.end());
   all.push_back(minus.size());
   return all;
-}
-
-//////////////////////////////////////////////////////////////////////////////
-//
-//    CHOICE RULE
-//
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-////' Exponential choice rule
-////'
-////' \code{choice_rule} calculates the probability of choosing A using an ex-
-////'   ponential choice rule.
-////'
-////' @param utA numeric specifying the utility of option A
-////' @param utB numeric specifying the utility of option B
-////' @param phi numeric specifying the choice sensitivity
-////'
-////' @return a choice probability
-////'
-////' @export
-//// [[Rcpp::export]]
-inline double choice_rule(double utA, double utB, double phi){
-  return 1 / (1 + exp(phi * (utB - utA)));
   }
+
 
 
 #endif // __UTILITIES__

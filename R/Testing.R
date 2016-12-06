@@ -1,9 +1,10 @@
 
 # require(Rcpp)
-# # sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/environments.cpp')
-# sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/CPTcpp.cpp')
+# # # sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/environments.cpp')
+# # sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/CPTcpp.cpp')
 # sourceCpp('~/Dropbox (2.0)/Work/Software/choicepp/src/sample.cpp')
 #
+# #
 # edit2(c(2,2),c(2,2,.8,.2))
 #
 

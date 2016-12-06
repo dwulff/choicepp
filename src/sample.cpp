@@ -140,7 +140,6 @@ std::vector<double> smpl_n(NumericVector opt, int n){
   return ss;
   }
 
-
 //////////////////////////////////////////////////////////////////////////////
 //
 //    SAMPLING N
@@ -185,48 +184,28 @@ GenericVector sampl_n(GenericVector prob, std::vector<int> ns){
 //
 //////////////////////////////////////////////////////////////////////////////
 
-double extrem(double p){
-  return 2 * (std::max(p,1.-p)-.5);
-  }
-double pA_stop(double uA, double uB, double n, double gamma){
-  return 1 / (1+exp(-1 * (n/gamma)*std::abs((uB-uA))));
-  }
-double pA_choose(double uA, double uB){
-  return 1 / (1+exp(uB-uA));
+
+double p_stop(double uA, double uB, double n, double phi){
+  double pa = 1 / (1+exp(-1 * n * phi * std::abs((uB-uA))));
+  return 2 * (std::max(pa,1.-pa)-.5);
   }
 
-std::vector<double> getopt(std::map<double, double> tab){
+NumericVector getopt(std::map<double, double> tab){
   std::vector<double> ed_opt;
   std::map<double, double>::const_iterator it;
   for(it = tab.begin(); it != tab.end(); ++it) ed_opt.push_back(it->first);
   for(it = tab.begin(); it != tab.end(); ++it) ed_opt.push_back(it->second);
-  return arrange(ed_opt);
-  }
-
-// [[Rcpp::export]]
-double ut(std::vector<double> opt,  double alpha = 1, double beta = 1, double lambda = 1){
-  int no = floor(opt.size() / 2.);
-  double n = 0;
-  for(int i = no; i < opt.size(); i++) n += opt[i];
-  double v, o, ut = 0;
-  for(int i = 0; i < no; i++){
-    o = opt[i];
-    if(o < 0) {
-      v = -1 * lambda * pow(std::abs(o), beta);
-      } else {
-      v = pow(std::abs(o), alpha);
-      }
-    ut += v * (opt[i + no] / n);
-    }
-  return ut;
+  std::vector<double> arr_opt = arrange(ed_opt);
+  return Rcpp::wrap(arr_opt);
   }
 
 
 // [[Rcpp::export]]
-GenericVector smpl_swe(NumericVector a, NumericVector b, double alpha, double lambda, double phi){
+GenericVector smpl_swe(NumericVector a, NumericVector b, double phi, std::vector<double> par, int type){
   std::map<double, double> taba,tabb;
-  std::vector<double> ssa, ssb, expa, expb;
-  double sa, sb, ua, ub, pa, ex, r;
+  std::vector<double> ssa, ssb;
+  NumericVector expa, expb;
+  double sa, sb, ua, ub, ps, r;
   bool cont = true;
   int i = 0;
 
@@ -241,30 +220,17 @@ GenericVector smpl_swe(NumericVector a, NumericVector b, double alpha, double la
     tabb[sb]++;
     expa = getopt(taba);
     expb = getopt(tabb);
-    ua = ut(expa,alpha,alpha,lambda);
-    ub = ut(expb,alpha,alpha,lambda);
-    pa = pA_stop(ua,ub,i,phi);
-    ex = extrem(pa);
+    ua = utility(expa,par,type);
+    ub = utility(expb,par,type);
+    ps = p_stop(ua,ub,i,phi);
     //std::cout << ex << '_' << ua << '_' << ub << '_' << i/phi << '\n';
     r = double(std::rand()) / RAND_MAX;
-    if(r < ex) cont = false;
-    }
-
-  //choose
-  int choice;
-  r = double(std::rand()) / RAND_MAX;
-  pa = pA_choose(ua,ub);
-  //std::cout << pa << '\n';
-  if(r < pa){
-    choice = 0;
-    } else {
-    choice = 1;
+    if(r < ps) cont = false;
     }
 
   GenericVector oo(3);
   oo[0] = ssa;
   oo[1] = ssb;
-  oo[2] = choice;
   return oo;
   }
 
@@ -280,17 +246,16 @@ GenericVector smpl_swe(NumericVector a, NumericVector b, double alpha, double la
 //'   problems in the set.
 //' @param phi a numeric specifying the sensitivity to the difference in
 //'   option utilities.
-//' @param alpha a numeric specifiying the shape of the diminishing return
-//'   curve of the outcome value function.
-//' @param lambda a numeric specifiying the degree of asymmetry between the
-//'   gain and loss value functions.
+//' @param par a numeric vector to be passed on to \link{utility}.
+//' @param type an integer to be passed on to \link{utility}.
+//'
 //'
 //' @return a list of witch each element containing the samples for option
 //'   A, the samples for option B, and the choice.
 //'
 //' @export
 // [[Rcpp::export]]
-GenericVector sampl_swe(GenericVector prob, double phi, double alpha = 1, double lambda = 1){
+GenericVector sampl_swe(GenericVector prob, double phi, std::vector<double> par, int type){
   NumericMatrix As = prob[0];
   NumericMatrix Bs = prob[1];
   int np = As.nrow();
@@ -298,7 +263,7 @@ GenericVector sampl_swe(GenericVector prob, double phi, double alpha = 1, double
   for(int p = 0; p < np; p++){
     NumericVector A = As(p,_);
     NumericVector B = Bs(p,_);
-    ss[p] = smpl_swe(A,B,alpha,lambda,1./phi);
+    ss[p] = smpl_swe(A,B,phi,par,type);
     }
   return ss;
   }
@@ -314,8 +279,9 @@ GenericVector sampl_swe(GenericVector prob, double phi, double alpha = 1, double
 // [[Rcpp::export]]
 GenericVector smpl_sure(NumericVector a, NumericVector b, double gamma_eq, double gamma_uneq){
   std::map<double, double> taba,tabb;
-  std::vector<double> ssa, ssb, expa, expb;
-  double sa, sb, ua, ub, pa, pstop, r;
+  std::vector<double> ssa, ssb;
+  NumericVector expa, expb;
+  double sa, sb, ps, r;
   bool cont = true;
   int i = 0;
 
@@ -329,34 +295,18 @@ GenericVector smpl_sure(NumericVector a, NumericVector b, double gamma_eq, doubl
     taba[sa]++;
     tabb[sb]++;
     if(taba.size() == tabb.size()){
-      pstop = 1. - std::pow(1./i,gamma_eq);
+      ps = 1. - std::pow(1./i,gamma_eq);
       } else {
-      pstop = 1. - std::pow(1./i,gamma_uneq);
+      ps = 1. - std::pow(1./i,gamma_uneq);
       }
     //std::cout << pstop << '\n';
     r = double(std::rand()) / RAND_MAX;
-    if(r < pstop) cont = false;
-    }
-
-  //choose
-  int choice;
-  expa = getopt(taba);
-  expb = getopt(tabb);
-  ua = ut(expa);
-  ub = ut(expb);
-  pa = pA_choose(ua,ub);
-  r = double(std::rand()) / RAND_MAX;
-  //std::cout << pa << '\n';
-  if(r < pa){
-    choice = 0;
-    } else {
-    choice = 1;
+    if(r < ps) cont = false;
     }
 
   GenericVector oo(3);
   oo[0] = ssa;
   oo[1] = ssb;
-  oo[2] = choice;
   return oo;
   }
 
