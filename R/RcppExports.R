@@ -629,11 +629,3 @@ tax_rndchoice <- function(par, problems, type = 1L) {
     .Call('choicepp_tax_rndchoice', PACKAGE = 'choicepp', par, problems, type)
 }
 
-cump_test <- function(ps) {
-    .Call('choicepp_cump_test', PACKAGE = 'choicepp', ps)
-}
-
-arrange <- function(opt) {
-    .Call('choicepp_arrange', PACKAGE = 'choicepp', opt)
-}
-

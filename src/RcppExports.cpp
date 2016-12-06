@@ -490,25 +490,3 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cump_test
-std::vector<double> cump_test(std::vector<double> ps);
-RcppExport SEXP choicepp_cump_test(SEXP psSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::vector<double> >::type ps(psSEXP);
-    rcpp_result_gen = Rcpp::wrap(cump_test(ps));
-    return rcpp_result_gen;
-END_RCPP
-}
-// arrange
-std::vector<double> arrange(std::vector<double> opt);
-RcppExport SEXP choicepp_arrange(SEXP optSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::vector<double> >::type opt(optSEXP);
-    rcpp_result_gen = Rcpp::wrap(arrange(opt));
-    return rcpp_result_gen;
-END_RCPP
-}
