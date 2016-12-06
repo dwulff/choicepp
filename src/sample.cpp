@@ -189,7 +189,7 @@ double extrem(double p){
   return 2 * (std::max(p,1.-p)-.5);
   }
 double pA_stop(double uA, double uB, double n, double gamma){
-  return 1 / (1+exp((n/gamma)*(uB-uA)));
+  return 1 / (1+exp(-1 * (n/gamma)*std::abs((uB-uA))));
   }
 double pA_choose(double uA, double uB){
   return 1 / (1+exp(uB-uA));
