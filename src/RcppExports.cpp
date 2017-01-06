@@ -185,6 +185,41 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// nm
+int nm(GenericVector oo);
+RcppExport SEXP choicepp_nm(SEXP ooSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type oo(ooSEXP);
+    rcpp_result_gen = Rcpp::wrap(nm(oo));
+    return rcpp_result_gen;
+END_RCPP
+}
+// nm_rand
+int nm_rand(GenericVector oo, double phi);
+RcppExport SEXP choicepp_nm_rand(SEXP ooSEXP, SEXP phiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type oo(ooSEXP);
+    Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
+    rcpp_result_gen = Rcpp::wrap(nm_rand(oo, phi));
+    return rcpp_result_gen;
+END_RCPP
+}
+// nms
+NumericVector nms(GenericVector ss, double phi);
+RcppExport SEXP choicepp_nms(SEXP ssSEXP, SEXP phiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type ss(ssSEXP);
+    Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
+    rcpp_result_gen = Rcpp::wrap(nms(ss, phi));
+    return rcpp_result_gen;
+END_RCPP
+}
 // stdom1
 bool stdom1(std::vector<double> oA, std::vector<double> pA, std::vector<double> oB, std::vector<double> pB);
 RcppExport SEXP choicepp_stdom1(SEXP oASEXP, SEXP pASEXP, SEXP oBSEXP, SEXP pBSEXP) {
@@ -242,6 +277,43 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
     Rcpp::traits::input_parameter< int >::type nA(nASEXP);
     rcpp_result_gen = Rcpp::wrap(p_arrange(problems, nA));
+    return rcpp_result_gen;
+END_RCPP
+}
+// submean
+double submean(std::vector<double> x, int a, int b);
+RcppExport SEXP choicepp_submean(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type a(aSEXP);
+    Rcpp::traits::input_parameter< int >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(submean(x, a, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// recency_wos
+NumericVector recency_wos(GenericVector oo, int choice);
+RcppExport SEXP choicepp_recency_wos(SEXP ooSEXP, SEXP choiceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type oo(ooSEXP);
+    Rcpp::traits::input_parameter< int >::type choice(choiceSEXP);
+    rcpp_result_gen = Rcpp::wrap(recency_wos(oo, choice));
+    return rcpp_result_gen;
+END_RCPP
+}
+// recency
+NumericMatrix recency(GenericVector ss, NumericVector choices);
+RcppExport SEXP choicepp_recency(SEXP ssSEXP, SEXP choicesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type ss(ssSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type choices(choicesSEXP);
+    rcpp_result_gen = Rcpp::wrap(recency(ss, choices));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -327,9 +399,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// smpl_swe
-GenericVector smpl_swe(NumericVector a, NumericVector b, double phi, std::vector<double> par, int type);
-RcppExport SEXP choicepp_smpl_swe(SEXP aSEXP, SEXP bSEXP, SEXP phiSEXP, SEXP parSEXP, SEXP typeSEXP) {
+// smpl_easy
+GenericVector smpl_easy(NumericVector a, NumericVector b, double phi, std::vector<double> par, int type);
+RcppExport SEXP choicepp_smpl_easy(SEXP aSEXP, SEXP bSEXP, SEXP phiSEXP, SEXP parSEXP, SEXP typeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -338,13 +410,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
     Rcpp::traits::input_parameter< int >::type type(typeSEXP);
-    rcpp_result_gen = Rcpp::wrap(smpl_swe(a, b, phi, par, type));
+    rcpp_result_gen = Rcpp::wrap(smpl_easy(a, b, phi, par, type));
     return rcpp_result_gen;
 END_RCPP
 }
-// sampl_swe
-GenericVector sampl_swe(GenericVector prob, double phi, std::vector<double> par, int type);
-RcppExport SEXP choicepp_sampl_swe(SEXP probSEXP, SEXP phiSEXP, SEXP parSEXP, SEXP typeSEXP) {
+// sampl_easy
+GenericVector sampl_easy(GenericVector prob, double phi, std::vector<double> par, int type);
+RcppExport SEXP choicepp_sampl_easy(SEXP probSEXP, SEXP phiSEXP, SEXP parSEXP, SEXP typeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -352,13 +424,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
     Rcpp::traits::input_parameter< int >::type type(typeSEXP);
-    rcpp_result_gen = Rcpp::wrap(sampl_swe(prob, phi, par, type));
+    rcpp_result_gen = Rcpp::wrap(sampl_easy(prob, phi, par, type));
     return rcpp_result_gen;
 END_RCPP
 }
-// smpl_sure
-GenericVector smpl_sure(NumericVector a, NumericVector b, double gamma_eq, double gamma_uneq);
-RcppExport SEXP choicepp_smpl_sure(SEXP aSEXP, SEXP bSEXP, SEXP gamma_eqSEXP, SEXP gamma_uneqSEXP) {
+// smpl_even
+GenericVector smpl_even(NumericVector a, NumericVector b, double gamma_eq, double gamma_uneq);
+RcppExport SEXP choicepp_smpl_even(SEXP aSEXP, SEXP bSEXP, SEXP gamma_eqSEXP, SEXP gamma_uneqSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -366,20 +438,98 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type b(bSEXP);
     Rcpp::traits::input_parameter< double >::type gamma_eq(gamma_eqSEXP);
     Rcpp::traits::input_parameter< double >::type gamma_uneq(gamma_uneqSEXP);
-    rcpp_result_gen = Rcpp::wrap(smpl_sure(a, b, gamma_eq, gamma_uneq));
+    rcpp_result_gen = Rcpp::wrap(smpl_even(a, b, gamma_eq, gamma_uneq));
     return rcpp_result_gen;
 END_RCPP
 }
-// sampl_sure
-GenericVector sampl_sure(GenericVector prob, double gamma_eq, double gamma_uneq);
-RcppExport SEXP choicepp_sampl_sure(SEXP probSEXP, SEXP gamma_eqSEXP, SEXP gamma_uneqSEXP) {
+// sampl_even
+GenericVector sampl_even(GenericVector prob, double gamma_eq, double gamma_uneq);
+RcppExport SEXP choicepp_sampl_even(SEXP probSEXP, SEXP gamma_eqSEXP, SEXP gamma_uneqSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< GenericVector >::type prob(probSEXP);
     Rcpp::traits::input_parameter< double >::type gamma_eq(gamma_eqSEXP);
     Rcpp::traits::input_parameter< double >::type gamma_uneq(gamma_uneqSEXP);
-    rcpp_result_gen = Rcpp::wrap(sampl_sure(prob, gamma_eq, gamma_uneq));
+    rcpp_result_gen = Rcpp::wrap(sampl_even(prob, gamma_eq, gamma_uneq));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_nout
+NumericVector get_nout(GenericVector prob);
+RcppExport SEXP choicepp_get_nout(SEXP probSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type prob(probSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_nout(prob));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_minn
+int get_minn(GenericVector prob);
+RcppExport SEXP choicepp_get_minn(SEXP probSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type prob(probSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_minn(prob));
+    return rcpp_result_gen;
+END_RCPP
+}
+// smpl_complete
+GenericVector smpl_complete(NumericVector a, NumericVector b, int n, double gamma_compl, double gamma_incompl);
+RcppExport SEXP choicepp_smpl_complete(SEXP aSEXP, SEXP bSEXP, SEXP nSEXP, SEXP gamma_complSEXP, SEXP gamma_incomplSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type b(bSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_compl(gamma_complSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_incompl(gamma_incomplSEXP);
+    rcpp_result_gen = Rcpp::wrap(smpl_complete(a, b, n, gamma_compl, gamma_incompl));
+    return rcpp_result_gen;
+END_RCPP
+}
+// smpl_complete2
+GenericVector smpl_complete2(NumericVector a, NumericVector b, int n, double gamma_compl, double gamma_incompl);
+RcppExport SEXP choicepp_smpl_complete2(SEXP aSEXP, SEXP bSEXP, SEXP nSEXP, SEXP gamma_complSEXP, SEXP gamma_incomplSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type b(bSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_compl(gamma_complSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_incompl(gamma_incomplSEXP);
+    rcpp_result_gen = Rcpp::wrap(smpl_complete2(a, b, n, gamma_compl, gamma_incompl));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sampl_complete
+GenericVector sampl_complete(GenericVector prob, double gamma_compl, double gamma_incompl);
+RcppExport SEXP choicepp_sampl_complete(SEXP probSEXP, SEXP gamma_complSEXP, SEXP gamma_incomplSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type prob(probSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_compl(gamma_complSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_incompl(gamma_incomplSEXP);
+    rcpp_result_gen = Rcpp::wrap(sampl_complete(prob, gamma_compl, gamma_incompl));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sampl_complete2
+GenericVector sampl_complete2(GenericVector prob, double gamma_compl, double gamma_incompl);
+RcppExport SEXP choicepp_sampl_complete2(SEXP probSEXP, SEXP gamma_complSEXP, SEXP gamma_incomplSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type prob(probSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_compl(gamma_complSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_incompl(gamma_incomplSEXP);
+    rcpp_result_gen = Rcpp::wrap(sampl_complete2(prob, gamma_compl, gamma_incompl));
     return rcpp_result_gen;
 END_RCPP
 }

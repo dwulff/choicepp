@@ -301,6 +301,27 @@ cpt_rndchoice_cert <- function(par, problems, type = 000L) {
     .Call('choicepp_cpt_rndchoice_cert', PACKAGE = 'choicepp', par, problems, type)
 }
 
+#' Compute natural mean
+#'
+#' @export
+nm <- function(oo) {
+    .Call('choicepp_nm', PACKAGE = 'choicepp', oo)
+}
+
+#' Compute natural mean
+#'
+#' @export
+nm_rand <- function(oo, phi) {
+    .Call('choicepp_nm_rand', PACKAGE = 'choicepp', oo, phi)
+}
+
+#' Compute natural mean
+#'
+#' @export
+nms <- function(ss, phi) {
+    .Call('choicepp_nms', PACKAGE = 'choicepp', ss, phi)
+}
+
 #' Test for 1st order stochastic dominance
 #'
 #' \code{stdom1} tests if one of two problems is stochastically dominant
@@ -383,6 +404,21 @@ p_arrange <- function(problems, nA = 0L) {
     .Call('choicepp_p_arrange', PACKAGE = 'choicepp', problems, nA)
 }
 
+submean <- function(x, a, b) {
+    .Call('choicepp_submean', PACKAGE = 'choicepp', x, a, b)
+}
+
+recency_wos <- function(oo, choice) {
+    .Call('choicepp_recency_wos', PACKAGE = 'choicepp', oo, choice)
+}
+
+#' Compute recency effect
+#'
+#' @export
+recency <- function(ss, choices) {
+    .Call('choicepp_recency', PACKAGE = 'choicepp', ss, choices)
+}
+
 edit1 <- function(ss, size = 0L) {
     .Call('choicepp_edit1', PACKAGE = 'choicepp', ss, size)
 }
@@ -434,21 +470,20 @@ sampl_n <- function(prob, ns) {
     .Call('choicepp_sampl_n', PACKAGE = 'choicepp', prob, ns)
 }
 
-smpl_swe <- function(a, b, phi, par, type) {
-    .Call('choicepp_smpl_swe', PACKAGE = 'choicepp', a, b, phi, par, type)
+smpl_easy <- function(a, b, phi, par, type) {
+    .Call('choicepp_smpl_easy', PACKAGE = 'choicepp', a, b, phi, par, type)
 }
 
-#' Sample using a stop when easy rule
+#' Sampling algorithm using stop when easy stopping rule
 #'
-#' \code{sample_swe} implements a sampling process that terminates
-#'   increasingly likely as the distance when the difference between the
-#'   options is large
+#' \code{smpl_easy} implements a sampling process that terminates sampling
+#'   increasingly likely as the distance between the options becomes large
 #'
 #' @param prob a problem table as produced by \link{p_arrange}.
 #' @param ns numceric vector whose length is either one or the number of
 #'   problems in the set.
 #' @param phi a numeric specifying the sensitivity to the difference in
-#'   option utilities.
+#'   option utilities. Large numbers result in early search termination.
 #' @param par a numeric vector to be passed on to \link{utility}.
 #' @param type an integer to be passed on to \link{utility}.
 #'
@@ -457,33 +492,100 @@ smpl_swe <- function(a, b, phi, par, type) {
 #'   A, the samples for option B, and the choice.
 #'
 #' @export
-sampl_swe <- function(prob, phi, par, type) {
-    .Call('choicepp_sampl_swe', PACKAGE = 'choicepp', prob, phi, par, type)
+sampl_easy <- function(prob, phi, par, type) {
+    .Call('choicepp_sampl_easy', PACKAGE = 'choicepp', prob, phi, par, type)
 }
 
-smpl_sure <- function(a, b, gamma_eq, gamma_uneq) {
-    .Call('choicepp_smpl_sure', PACKAGE = 'choicepp', a, b, gamma_eq, gamma_uneq)
+smpl_even <- function(a, b, gamma_eq, gamma_uneq) {
+    .Call('choicepp_smpl_even', PACKAGE = 'choicepp', a, b, gamma_eq, gamma_uneq)
 }
 
-#' Sample using a search until rare event
+#' Sampling algorithm using a stop when even stopping rule
 #'
-#' \code{sample_swe} implements a sampling process that terminates more
+#' \code{sample_even} implements a sampling process that terminates more
 #'   likly when equally many outcomes in both options have been experienced.
 #'
 #' @param prob a problem table as produced by \link{p_arrange}.
-#' @param ns numceric vector whose length is either one or the number of
-#'   problems in the set.
 #' @param gamma_eq a numeric controlling the likelihood with which search
-#'   stops in the case of equally many experienced outcomes.
+#'   stops in the case of equally many experienced outcomes. Large number
+#'   result in early search termination
 #' @param gamma_uneq a numeric controlling the likelihood with which search
-#'   stops in the case of equally many experienced outcomes.
+#'   stops in the case of equally many experienced outcomes. Large numbers
+#'   result in early search termination.
 #'
 #' @return a list of witch each element containing the samples for option
 #'   A, the samples for option B, and the choice.
 #'
 #' @export
-sampl_sure <- function(prob, gamma_eq, gamma_uneq) {
-    .Call('choicepp_sampl_sure', PACKAGE = 'choicepp', prob, gamma_eq, gamma_uneq)
+sampl_even <- function(prob, gamma_eq, gamma_uneq) {
+    .Call('choicepp_sampl_even', PACKAGE = 'choicepp', prob, gamma_eq, gamma_uneq)
+}
+
+get_nout <- function(prob) {
+    .Call('choicepp_get_nout', PACKAGE = 'choicepp', prob)
+}
+
+get_minn <- function(prob) {
+    .Call('choicepp_get_minn', PACKAGE = 'choicepp', prob)
+}
+
+smpl_complete <- function(a, b, n, gamma_compl, gamma_incompl) {
+    .Call('choicepp_smpl_complete', PACKAGE = 'choicepp', a, b, n, gamma_compl, gamma_incompl)
+}
+
+smpl_complete2 <- function(a, b, n, gamma_compl, gamma_incompl) {
+    .Call('choicepp_smpl_complete2', PACKAGE = 'choicepp', a, b, n, gamma_compl, gamma_incompl)
+}
+
+#' Sampling algorithm using a stop when complete stopping rule
+#'
+#' \code{sample_complete} implements a sampling process that terminates more
+#'   likly when (at least) an expected number of outcomes has been observed
+#'   across both options. The expected number of outcomes is drawn from the
+#'   distribution of number of outcomes across the entire problem set.
+#'
+#' @param prob a problem table as produced by \link{p_arrange}.
+#' @param ns numceric vector whose length is either one or the number of
+#'   problems in the set.
+#' @param gamma_compl a numeric controlling the likelihood with which search
+#'   stops in the case of equally many experienced outcomes. Large numbers
+#'   result in early search termination.
+#' @param gamma_incompl a numeric controlling the likelihood with which
+#'   search stops in the case of equally many experienced outcomes. Large
+#'   numbers result in early search termination.
+#'
+#' @return a list of witch each element containing the samples for option
+#'   A, the samples for option B, and the choice.
+#'
+#' @export
+sampl_complete <- function(prob, gamma_compl, gamma_incompl) {
+    .Call('choicepp_sampl_complete', PACKAGE = 'choicepp', prob, gamma_compl, gamma_incompl)
+}
+
+#' Sampling algorithm using a stop when complete stopping rule
+#'
+#' \code{sample_complete2} implements a sampling process that terminates more
+#'   likly when a minimum number of outcomes has been observed across both
+#'   options and non-zero outcomes have been observed for both options.
+#'   The minimum number of outcomes equals the minimum the distribution of
+#'   number of outcomes across the entire problem set.
+#'
+#' @param prob a problem table as produced by \link{p_arrange}.
+#' @param ns numceric vector whose length is either one or the number of
+#'   problems in the set.
+#' @param gamma_compl a numeric controlling the likelihood with which search
+#'   stops in the case of equally many experienced outcomes. Large numbers
+#'   result in early search termination.
+#' @param gamma_incompl a numeric controlling the likelihood with which
+#'   search stops in the case of equally many experienced outcomes. Large
+#'   numbers result in early search termination.
+#'
+#' @return a list of witch each element containing the samples for option
+#'   A, the samples for option B, and the choice.
+#'
+#' @export
+sampl_complete2 <- function(prob, gamma_compl, gamma_incompl) {
+    .Call('choicepp_sampl_complete2', PACKAGE = 'choicepp', prob, gamma_compl, gamma_incompl)
 }
 
 #' Value function of TAX
