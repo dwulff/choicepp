@@ -195,10 +195,10 @@ NumericMatrix pgen_rnd(std::vector<int> ns,
   NumericMatrix problems(nG + nL + nM, nA * 2 + nB * 2);
   int iG = 0, iL = 0, iM = 0, i = 0;
   while(iG < nG){
-    std::vector<double> psA = nrnf(nA);
-    std::vector<double> osA = nrnf(nA,0,upper,false);
-    std::vector<double> psB = nrnf(nB);
-    std::vector<double> osB = nrnf(nB,0,upper,false);
+    std::vector<double> psA = nrnf_bound(nA);
+    std::vector<double> osA = nrnf(nA,0,upper);
+    std::vector<double> psB = nrnf_bound(nB);
+    std::vector<double> osB = nrnf(nB,0,upper);
 
     if(ecological){
       std::vector<double> ps, os;
@@ -234,7 +234,7 @@ NumericMatrix pgen_rnd(std::vector<int> ns,
       problems(i,j) = osA[j];
       problems(i,j + nA) = psA[j];
       }
-    ps = nrnf(nB);
+    ps = nrnf_bound(nB);
     for(int j = 0; j < nB; j++){
       problems(i,j + nA * 2) = osB[j];
       problems(i,j + nA * 2 + nB) = psB[j];
@@ -243,10 +243,10 @@ NumericMatrix pgen_rnd(std::vector<int> ns,
     iG++;
     }
   while(iL < nL){
-    std::vector<double> psA = nrnf(nA);
-    std::vector<double> osA = nrnf(nA,lower,0,false);
-    std::vector<double> psB = nrnf(nB);
-    std::vector<double> osB = nrnf(nB,lower,0,false);
+    std::vector<double> psA = nrnf_bound(nA);
+    std::vector<double> osA = nrnf(nA,lower,0);
+    std::vector<double> psB = nrnf_bound(nB);
+    std::vector<double> osB = nrnf(nB,lower,0);
 
     if(ecological){
       std::vector<double> ps, os;
@@ -283,7 +283,7 @@ NumericMatrix pgen_rnd(std::vector<int> ns,
       problems(i,j) = osA[j];
       problems(i,j + nA) = psA[j];
     }
-    ps = nrnf(nB);
+    ps = nrnf_bound(nB);
     for(int j = 0; j < nB; j++){
       problems(i,j + nA * 2) = osB[j];
       problems(i,j + nA * 2 + nB) = psB[j];
@@ -292,13 +292,13 @@ NumericMatrix pgen_rnd(std::vector<int> ns,
     iL++;
   }
   while(iM < nM){
-    std::vector<double> psA = nrnf(nA);
+    std::vector<double> psA = nrnf_bound(nA);
     std::vector<double> osA;
     osA.push_back(rnf(lower,upper));
     if(osA[0] < 0) osA.push_back(rnf(0,upper));
     else osA.push_back(rnf(lower,0));
     for(int j = 2; j < nA; j++) osA.push_back(rnf(lower,upper));
-    std::vector<double> psB = nrnf(nB);
+    std::vector<double> psB = nrnf_bound(nB);
     std::vector<double> osB;
     osB.push_back(rnf(lower,upper));
     if(osB[0] < 0) osB.push_back(rnf(0,upper));
@@ -339,7 +339,7 @@ NumericMatrix pgen_rnd(std::vector<int> ns,
       problems(i,j) = osA[j];
       problems(i,j + nA) = psA[j];
     }
-    ps = nrnf(nB);
+    ps = nrnf_bound(nB);
     for(int j = 0; j < nB; j++){
       problems(i,j + nA * 2) = osB[j];
       problems(i,j + nA * 2 + nB) = psB[j];

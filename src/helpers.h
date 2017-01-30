@@ -41,26 +41,31 @@ inline double rnf(int a = 0, int b = 1){
   return r * (b - a) + a;
   }
 
-inline std::vector<double> nrnf(int n, int a = 0, int b = 1, bool norm = true){
+
+inline std::vector<double> nrnf(int n, double a = 0, double b = 1){
   int i;
   double r;
   std::vector<double> rs, rsn;
   for(i = 0; i < n; i++){
     r = double(std::rand()) / RAND_MAX;
     rs.push_back(r * (b - a) + a);
-  }
-  if(norm){
-    double sm = 0;
-    for(i = 0; i < n; i++){
-      sm += rs[i];
-    }
-    for(i = 0; i < n; i++){
-      rsn.push_back(rs[i] / sm);
-    }
-    return rsn;
-  }
+  	}
   return rs;
-}
+  }
+
+
+inline std::vector<double> nrnf_bound(int n, double bound = 1){
+  int i;
+  double r;
+  std::vector<double> rs, rsn;
+  for(i = 0; i < (n-1); i++){
+    r = (double(std::rand()) / RAND_MAX) * bound;
+    rs.push_back(r);
+    bound = bound - r;
+    }
+  rs.push_back(bound);
+  return rs;
+  }
 
 
 inline std::vector<double> cump(std::vector<double> ps){

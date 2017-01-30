@@ -375,7 +375,7 @@ int get_minn(GenericVector prob){
   int nA = std::floor(As.ncol() / 2.0);
   int nB = std::floor(Bs.ncol() / 2.0);
   int np = As.nrow();
-  int min_nout = 0, nout = 0;
+  int min_nout = 0;
   for(int p = 0; p < np; ++p){
     NumericVector A = As(p,_);
     NumericVector B = Bs(p,_);
