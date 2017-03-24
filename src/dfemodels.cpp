@@ -2,6 +2,12 @@
 #include "helpers.h"
 using namespace Rcpp;
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//        Natural mean
+//
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 //' Compute natural mean
 //'
@@ -49,6 +55,25 @@ int nm_rand(GenericVector oo, double phi) {
   return choice;
   }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//        Natural mean + recency
+//
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+//' Compute natural mean
+//'
+//' @export
+// [[Rcpp::export]]
+NumericVector nms(GenericVector ss, double phi) {
+  int np = ss.size();
+  NumericVector res(np);
+  for(int p = 0; p < np; p++){
+    res[p] = nm_rand(ss[p], phi);
+    }
+  return res;
+  }
+
 
 //' Compute natural mean ignoring first experiences
 //'
@@ -75,21 +100,7 @@ int nm_rec_rand(GenericVector oo, double phi, int ignore) {
   return choice;
 }
 
-
-//' Compute natural mean
-//'
-//' @export
-// [[Rcpp::export]]
-NumericVector nms(GenericVector ss, double phi) {
-  int np = ss.size();
-  NumericVector res(np);
-  for(int p = 0; p < np; p++){
-    res[p] = nm_rand(ss[p], phi);
-    }
-  return res;
-  }
-
-//' Compute natural mean
+//' Compute natural mean with recency
 //'
 //' @export
 // [[Rcpp::export]]
@@ -106,3 +117,124 @@ NumericVector nms_rec(GenericVector ss, double phi, std::vector<int> ignore) {
   }
   return res;
 }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//        Round-wise
+//
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+int rw(NumericVector opt, NumericVector out, bool extr = false) {
+  int ind = 0, n = opt.size();
+  std::vector<double> ms0;
+  std::vector<double> ms1;
+  double m0, m1;
+  if(opt[0] == 0){
+    m0 = out[0];
+    } else {
+    m1 = out[0];
+    }
+
+  for(int i = 1; i < n; ++i){
+    if(opt[i - 1] == opt[i]){
+      ind++;
+      if(opt[0] == 0){
+        m0 += out[i];
+        } else {
+        m1 += out[i];
+        }
+    } else {
+      if(opt[0] == 0){
+        ms0.push_back(m0 / ind);
+        m0 = out[i];
+        } else {
+        ms1.push_back(m0 / ind);
+        m1 = out[i];
+        }
+      ind = 0;
+    }
+  }
+  std::vector<double> comps;
+  if(ms0.size() > ms1.size()){
+    int n = ms1.size();
+    std::vector<double> comps;
+    for(int i = 0; i < n; ++i){
+      if(ms0[i] > ms1[i]){
+        comps.push_back(0);
+        }
+      if(ms0[i] < ms1[i]){
+        comps.push_back(1);
+        }
+      if(ms0[i + 1] > ms1[i]){
+        comps.push_back(0);
+        }
+      if(ms0[i + 1] < ms1[i]){
+        comps.push_back(1);
+        }
+      }
+  } else if(ms0.size() < ms1.size()){
+    int n = ms0.size();
+    std::vector<double> comps;
+    for(int i = 0; i < n; ++i){
+      if(ms0[i] > ms1[i]){
+        comps.push_back(0);
+        }
+      if(ms0[i] < ms1[i]){
+        comps.push_back(1);
+        }
+      if(ms0[i] > ms1[i + 1]){
+        comps.push_back(0);
+        }
+      if(ms0[i] < ms1[i + 1]){
+        comps.push_back(1);
+        }
+      }
+  } else {
+    int n = ms0.size() - 1;
+    for(int i = 0; i < n; ++i){
+      if(ms0[i] > ms1[i]){
+        comps.push_back(0);
+        }
+      if(ms0[i] < ms1[i]){
+        comps.push_back(1);
+        }
+      if(ms0[i] > ms1[i + 1]){
+        comps.push_back(0);
+        }
+      if(ms0[i] < ms1[i + 1]){
+        comps.push_back(1);
+        }
+      if(ms0[i + 1] > ms1[i]){
+        comps.push_back(0);
+        }
+      if(ms0[i + 1] < ms1[i]){
+        comps.push_back(1);
+        }
+      }
+    }
+
+  double p = 0;
+  n = comps.size();
+  if(n == 0){
+    return NA_REAL;
+    } else {
+    for(int i = 0; i < n; i++) p += comps[i];
+    p /= n;
+    }
+  if(extr == true) return p;
+  int choice;
+  if(p == .5) return NA_REAL;
+  if(p < .5){
+    choice = 0;
+    } else {
+    choice = 1;
+    }
+  return choice;
+  }
+
+
+
+
+
