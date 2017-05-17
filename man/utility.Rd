@@ -26,4 +26,3 @@ a utility.
   type of prospect theory. For details see \link{v_wrapper} and
   \link{w_wrapper}.
 }
-

@@ -9,4 +9,3 @@ nm_rand(oo, phi)
 \description{
 Compute natural mean
 }
-

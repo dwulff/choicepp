@@ -9,4 +9,3 @@ nm(oo)
 \description{
 Compute natural mean
 }
-

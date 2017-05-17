@@ -30,4 +30,3 @@ xx2 implements \code{alpha} and \code{beta}
 
 xx3 implements \code{alpha}, \code{beta}, and \code{lambda}
 }
-

@@ -37,6 +37,39 @@ int nm(GenericVector oo) {
 //'
 //' @export
 // [[Rcpp::export]]
+double nm_long(std::vector<double> opt, std::vector<double> out, bool extr = false) {
+  std::vector<double> s0, s1;
+  int n = opt.size();
+  for(int i = 0; i < n; ++i){
+    if(opt[i] == 0){
+      s0.push_back(out[i]);
+      } else {
+      s1.push_back(out[i]);
+      }
+    }
+  double m0 = 0, m1 = 0;
+  std::vector<double>::const_iterator it;
+  for(it = s0.begin(); it != s0.end(); ++it) m0 += *it;
+  for(it = s1.begin(); it != s1.end(); ++it) m1 += *it;
+  int choice;
+  if(extr == true) return m1 / (m1 + m0);
+  if(m0 != m1){
+    if(m0 > m1){
+      choice = 0;
+      } else {
+      choice = 1;
+      }
+    } else {
+    choice = -1;
+    }
+  return choice;
+  }
+
+
+//' Compute natural mean
+//'
+//' @export
+// [[Rcpp::export]]
 int nm_rand(GenericVector oo, double phi) {
   std::vector<double> s0 = oo[0];
   std::vector<double> s1 = oo[1];
@@ -125,9 +158,12 @@ NumericVector nms_rec(GenericVector ss, double phi, std::vector<int> ignore) {
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-int rw(NumericVector opt, NumericVector out, bool extr = false) {
-  int ind = 0, n = opt.size();
+//' Compute round wise
+//'
+//' @export
+// [[Rcpp::export]]
+double rw(std::vector<double> opt, std::vector<double> out, bool extr = false) {
+  int ind = 1, n = opt.size();
   std::vector<double> ms0;
   std::vector<double> ms1;
   double m0, m1;
@@ -136,81 +172,58 @@ int rw(NumericVector opt, NumericVector out, bool extr = false) {
     } else {
     m1 = out[0];
     }
-
   for(int i = 1; i < n; ++i){
-    if(opt[i - 1] == opt[i]){
+    if(opt[i - 1] == opt[i]){ //make sure this is not done for n+1
       ind++;
-      if(opt[0] == 0){
+      if(opt[i] == 0){
         m0 += out[i];
         } else {
         m1 += out[i];
         }
     } else {
-      if(opt[0] == 0){
+      if(opt[i-1] == 0){
         ms0.push_back(m0 / ind);
-        m0 = out[i];
-        } else {
-        ms1.push_back(m0 / ind);
         m1 = out[i];
+        } else {
+        ms1.push_back(m1 / ind);
+        m0 = out[i];
         }
-      ind = 0;
+      ind = 1;
     }
   }
-  std::vector<double> comps;
+  if(opt.back() == 0){
+    ms0.push_back(m0 / ind);
+    } else {
+    ms1.push_back(m1 / ind);
+    }
+  ind = 1;
+  std::vector<int> comps;
   if(ms0.size() > ms1.size()){
     int n = ms1.size();
-    std::vector<double> comps;
     for(int i = 0; i < n; ++i){
-      if(ms0[i] > ms1[i]){
-        comps.push_back(0);
-        }
-      if(ms0[i] < ms1[i]){
-        comps.push_back(1);
-        }
-      if(ms0[i + 1] > ms1[i]){
-        comps.push_back(0);
-        }
-      if(ms0[i + 1] < ms1[i]){
-        comps.push_back(1);
-        }
+      if(ms0[i] > ms1[i]) comps.push_back(0);
+      if(ms0[i] < ms1[i]) comps.push_back(1);
+      if(ms0[i + 1] > ms1[i]) comps.push_back(0);
+      if(ms0[i + 1] < ms1[i]) comps.push_back(1);
       }
   } else if(ms0.size() < ms1.size()){
     int n = ms0.size();
-    std::vector<double> comps;
     for(int i = 0; i < n; ++i){
-      if(ms0[i] > ms1[i]){
-        comps.push_back(0);
-        }
-      if(ms0[i] < ms1[i]){
-        comps.push_back(1);
-        }
-      if(ms0[i] > ms1[i + 1]){
-        comps.push_back(0);
-        }
-      if(ms0[i] < ms1[i + 1]){
-        comps.push_back(1);
-        }
+      if(ms0[i] > ms1[i]) comps.push_back(0);
+      if(ms0[i] < ms1[i]) comps.push_back(1);
+      if(ms0[i] > ms1[i + 1]) comps.push_back(0);
+      if(ms0[i] < ms1[i + 1]) comps.push_back(1);
       }
   } else {
-    int n = ms0.size() - 1;
+    int n = ms0.size();
     for(int i = 0; i < n; ++i){
-      if(ms0[i] > ms1[i]){
-        comps.push_back(0);
-        }
-      if(ms0[i] < ms1[i]){
-        comps.push_back(1);
-        }
-      if(ms0[i] > ms1[i + 1]){
-        comps.push_back(0);
-        }
-      if(ms0[i] < ms1[i + 1]){
-        comps.push_back(1);
-        }
-      if(ms0[i + 1] > ms1[i]){
-        comps.push_back(0);
-        }
-      if(ms0[i + 1] < ms1[i]){
-        comps.push_back(1);
+      if(ms0[i] > ms1[i]) comps.push_back(0);
+      if(ms0[i] < ms1[i]) comps.push_back(1);
+      if(i != (n-1)){
+        if(ms0[i] > ms1[i + 1]) comps.push_back(0);
+        if(ms0[i] < ms1[i + 1]) comps.push_back(1);
+        if(ms0[i + 1] > ms1[i]) comps.push_back(0);
+        if(ms0[i + 1] < ms1[i]) comps.push_back(1);
         }
       }
     }
@@ -218,14 +231,14 @@ int rw(NumericVector opt, NumericVector out, bool extr = false) {
   double p = 0;
   n = comps.size();
   if(n == 0){
-    return NA_REAL;
+    return -1;
     } else {
     for(int i = 0; i < n; i++) p += comps[i];
     p /= n;
     }
   if(extr == true) return p;
+  if(p == .5) return -1;
   int choice;
-  if(p == .5) return NA_REAL;
   if(p < .5){
     choice = 0;
     } else {

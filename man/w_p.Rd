@@ -24,4 +24,3 @@ a decision weight
 Prelec, D. (1998). The probability weighting function.
   Econometrica 66, 497–527.
 }
-

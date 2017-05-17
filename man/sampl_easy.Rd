@@ -27,4 +27,3 @@ a list of witch each element containing the samples for option
 \code{smpl_easy} implements a sampling process that terminates sampling
   increasingly likely as the distance between the options becomes large
 }
-

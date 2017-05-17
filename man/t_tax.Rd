@@ -22,4 +22,3 @@ a decision weight
 Birnbaum, M. H. (1999). Testing critical properties of
   decision making on the Internet. Psychological Science, 10(5), 399-407.
 }
-

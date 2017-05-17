@@ -20,4 +20,3 @@ a utility
 \code{u}, the TAX value function, transforms the magnitute of
   an outcome into utility space.
 }
-

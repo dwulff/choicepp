@@ -25,4 +25,3 @@ a list of witch each element containing the samples for option
 \code{sample_even} implements a sampling process that terminates more
   likly when equally many outcomes in both options have been experienced.
 }
-

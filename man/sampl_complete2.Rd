@@ -31,4 +31,3 @@ a list of witch each element containing the samples for option
   The minimum number of outcomes equals the minimum the distribution of
   number of outcomes across the entire problem set.
 }
-

@@ -66,4 +66,3 @@ one \code{gamma}.
 (1998) with one \code{delta} for losses, one \code{delta} gains, one
 \code{gamma} for losses and one \code{gamma} for gains.
 }
-

@@ -9,4 +9,3 @@ nm_rec_rand(oo, phi, ignore)
 \description{
 Compute natural mean ignoring first experiences
 }
-

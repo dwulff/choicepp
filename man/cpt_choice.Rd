@@ -21,4 +21,3 @@ a vector of choices
 \code{cpt_choice} produces deterministic choices for a set of choice
   problems and parameters.
 }
-

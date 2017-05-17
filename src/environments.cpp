@@ -408,6 +408,53 @@ GenericVector p_arrange(NumericMatrix problems, int nA = 0){
   }
 
 
+//////////////////////////////////////////////////////////////////////////////
+//
+//    DELAY DISCOUNTING
+//
+//////////////////////////////////////////////////////////////////////////////
 
+//' Generate delay discounting problems
+//'
+//' Generate random delay discounting problems.
+//'
+//' Algorithm draws two outcomes and two delays and then
+//' maps the smaller outcome to the smaller delay and the larger
+//' outcome to the larger delay.
+//'
+//' Values are drawn from uniform.
+//'
+//' @param n_problem integer specifying the number of problems.
+//' @param o_lower integer specifying the smalles possible outcome.
+//' @param o_upper integer specifying the largest possible outcome.
+//' @param d_lower integer specifying the smalles possible delay.
+//' @param d_upper integer specifying the smalles possible delay.
+//'
+//' @return Four column matrix containing for each problem
+//'   the outcome and delay of the sooner smaller option and the outcome and delay
+//'   of the larger later option (in that order).
+//'
+//' @export
+// [[Rcpp::export]]
+NumericMatrix pgen_dd(int n_problem,
+                      double o_lower = 0,
+                      double o_upper = 100,
+                      double d_lower = 0,
+                      double d_upper = 100){
+  std::vector<double> o(2);
+  std::vector<double> d(2);
+  NumericMatrix problems(n_problem,4);
+  for(int i = 0; i < n_problem; ++i){
+    o = nrnf(2,o_lower,o_upper);
+    d = nrnf(2,d_lower,d_upper);
+    sort(o.begin(),o.end());
+    sort(d.begin(),d.end());
+    problems(i,0) = o[0];
+    problems(i,1) = d[0];
+    problems(i,2) = o[1];
+    problems(i,3) = d[1];
+    }
+  return problems;
+  }
 
 

@@ -28,4 +28,3 @@ a decision weight
 Goldstein, W. M. and Einhorn, H. J. (1987). Expression Theory
   and the Preference Reversal Phenomena. Psychological Review 94, 236—254.
 }
-

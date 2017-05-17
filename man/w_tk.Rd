@@ -25,4 +25,3 @@ Tversky, A., & Kahneman, D. (1992). Advances in prospect
   theory: Cumulative representation of uncertainty. Journal of Risk and
   uncertainty, 5(4), 297-323.
 }
-

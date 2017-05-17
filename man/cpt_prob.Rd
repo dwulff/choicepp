@@ -21,4 +21,3 @@ a vector of choice probabilities
 \code{cpt_prob} computes for a set of choice problems and a set of
   parameters the respective probabilities of choosing option A.
 }
-

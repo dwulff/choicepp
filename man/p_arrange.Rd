@@ -20,4 +20,3 @@ a list of two matrices containing the outcomes and probabilities of
 \code{p_arrange} rearranges the matrix of problem to match the cumulative and
   decumulative specifications of CPT and TAX
 }
-

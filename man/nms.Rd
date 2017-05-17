@@ -9,4 +9,3 @@ nms(ss, phi)
 \description{
 Compute natural mean
 }
-

@@ -20,4 +20,3 @@ a choice probability
 \code{choice_rule} calculates the probability of choosing A using an ex-
   ponential choice rule.
 }
-

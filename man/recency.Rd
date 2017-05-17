@@ -9,4 +9,3 @@ recency(ss, choices)
 \description{
 Compute recency effect
 }
-

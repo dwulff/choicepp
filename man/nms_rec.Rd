@@ -2,11 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{nms_rec}
 \alias{nms_rec}
-\title{Compute natural mean}
+\title{Compute natural mean with recency}
 \usage{
 nms_rec(ss, phi, ignore)
 }
 \description{
-Compute natural mean
+Compute natural mean with recency
 }
-

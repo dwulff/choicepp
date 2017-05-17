@@ -20,4 +20,3 @@ A boolean indicating the status of 1st order stochastic dominance
 \code{stdom1} tests if one of two problems is stochastically dominant
   according to 1st order stochastic dominance.
 }
-

@@ -26,4 +26,3 @@ a utility
 \code{v}, being the standard value function, transforms the magnitute of
   an outcome into utility space
 }
-

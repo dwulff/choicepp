@@ -43,4 +43,3 @@ A matrix of choice problems
   problems without 1st and 2nd order stochastic dominance and an
   ecologically
 }
-

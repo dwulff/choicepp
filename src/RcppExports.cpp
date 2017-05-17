@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// pevbyn_nm
+double pevbyn_nm(NumericVector p, int n);
+RcppExport SEXP choicepp_pevbyn_nm(SEXP pSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(pevbyn_nm(p, n));
+    return rcpp_result_gen;
+END_RCPP
+}
 // v
 double v(double o, double alpha, double beta, double lambda);
 RcppExport SEXP choicepp_v(SEXP oSEXP, SEXP alphaSEXP, SEXP betaSEXP, SEXP lambdaSEXP) {
@@ -185,109 +197,228 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// u
-double u(double o, double alpha);
-RcppExport SEXP choicepp_u(SEXP oSEXP, SEXP alphaSEXP) {
+// expo_rule
+double expo_rule(double diff, double phi);
+RcppExport SEXP choicepp_expo_rule(SEXP diffSEXP, SEXP phiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type o(oSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(u(o, alpha));
+    Rcpp::traits::input_parameter< double >::type diff(diffSEXP);
+    Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
+    rcpp_result_gen = Rcpp::wrap(expo_rule(diff, phi));
     return rcpp_result_gen;
 END_RCPP
 }
-// t_tax
-double t_tax(double p, double gamma);
-RcppExport SEXP choicepp_t_tax(SEXP pSEXP, SEXP gammaSEXP) {
+// homo_rule
+double homo_rule(double u_ss, double u_ll, double phi);
+RcppExport SEXP choicepp_homo_rule(SEXP u_ssSEXP, SEXP u_llSEXP, SEXP phiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
-    rcpp_result_gen = Rcpp::wrap(t_tax(p, gamma));
+    Rcpp::traits::input_parameter< double >::type u_ss(u_ssSEXP);
+    Rcpp::traits::input_parameter< double >::type u_ll(u_llSEXP);
+    Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
+    rcpp_result_gen = Rcpp::wrap(homo_rule(u_ss, u_ll, phi));
     return rcpp_result_gen;
 END_RCPP
 }
-// w
-double w(double pi, double pk, double delta, double gamma, double n);
-RcppExport SEXP choicepp_w(SEXP piSEXP, SEXP pkSEXP, SEXP deltaSEXP, SEXP gammaSEXP, SEXP nSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type pi(piSEXP);
-    Rcpp::traits::input_parameter< double >::type pk(pkSEXP);
-    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
-    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
-    Rcpp::traits::input_parameter< double >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(w(pi, pk, delta, gamma, n));
-    return rcpp_result_gen;
-END_RCPP
-}
-// utility_tax
-double utility_tax(NumericVector opt, std::vector<double> par, int type);
-RcppExport SEXP choicepp_utility_tax(SEXP optSEXP, SEXP parSEXP, SEXP typeSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type opt(optSEXP);
-    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
-    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
-    rcpp_result_gen = Rcpp::wrap(utility_tax(opt, par, type));
-    return rcpp_result_gen;
-END_RCPP
-}
-// tax_prob
-std::vector<double> tax_prob(std::vector<double> par, GenericVector problems, int type);
-RcppExport SEXP choicepp_tax_prob(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+// EXPO_lik
+double EXPO_lik(std::vector<double> par, NumericMatrix problems, std::vector<int> choices, double epsilon, int type);
+RcppExport SEXP choicepp_EXPO_lik(SEXP parSEXP, SEXP problemsSEXP, SEXP choicesSEXP, SEXP epsilonSEXP, SEXP typeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
-    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
-    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
-    rcpp_result_gen = Rcpp::wrap(tax_prob(par, problems, type));
-    return rcpp_result_gen;
-END_RCPP
-}
-// tax_lik
-double tax_lik(std::vector<double> par, GenericVector problems, std::vector<int> choices, int type, double limit);
-RcppExport SEXP choicepp_tax_lik(SEXP parSEXP, SEXP problemsSEXP, SEXP choicesSEXP, SEXP typeSEXP, SEXP limitSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
-    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
     Rcpp::traits::input_parameter< std::vector<int> >::type choices(choicesSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
     Rcpp::traits::input_parameter< int >::type type(typeSEXP);
-    Rcpp::traits::input_parameter< double >::type limit(limitSEXP);
-    rcpp_result_gen = Rcpp::wrap(tax_lik(par, problems, choices, type, limit));
+    rcpp_result_gen = Rcpp::wrap(EXPO_lik(par, problems, choices, epsilon, type));
     return rcpp_result_gen;
 END_RCPP
 }
-// tax_choice
-std::vector<int> tax_choice(std::vector<double> par, GenericVector problems, int type);
-RcppExport SEXP choicepp_tax_choice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+// EXPO_choice
+std::vector<int> EXPO_choice(std::vector<double> par, NumericMatrix problems, int type, bool random);
+RcppExport SEXP choicepp_EXPO_choice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP, SEXP randomSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
-    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
     Rcpp::traits::input_parameter< int >::type type(typeSEXP);
-    rcpp_result_gen = Rcpp::wrap(tax_choice(par, problems, type));
+    Rcpp::traits::input_parameter< bool >::type random(randomSEXP);
+    rcpp_result_gen = Rcpp::wrap(EXPO_choice(par, problems, type, random));
     return rcpp_result_gen;
 END_RCPP
 }
-// tax_rndchoice
-std::vector<int> tax_rndchoice(std::vector<double> par, GenericVector problems, int type);
-RcppExport SEXP choicepp_tax_rndchoice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+// EXPO_rndchoice
+std::vector<int> EXPO_rndchoice(std::vector<double> par, NumericMatrix problems, int type);
+RcppExport SEXP choicepp_EXPO_rndchoice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
-    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
     Rcpp::traits::input_parameter< int >::type type(typeSEXP);
-    rcpp_result_gen = Rcpp::wrap(tax_rndchoice(par, problems, type));
+    rcpp_result_gen = Rcpp::wrap(EXPO_rndchoice(par, problems, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// EXPO_prob
+std::vector<double> EXPO_prob(std::vector<double> par, NumericMatrix problems, int type);
+RcppExport SEXP choicepp_EXPO_prob(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(EXPO_prob(par, problems, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// HYPER_lik
+double HYPER_lik(std::vector<double> par, NumericMatrix problems, std::vector<int> choices, double epsilon, int type);
+RcppExport SEXP choicepp_HYPER_lik(SEXP parSEXP, SEXP problemsSEXP, SEXP choicesSEXP, SEXP epsilonSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< std::vector<int> >::type choices(choicesSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(HYPER_lik(par, problems, choices, epsilon, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// HYPER_choice
+std::vector<int> HYPER_choice(std::vector<double> par, NumericMatrix problems, int type, bool random);
+RcppExport SEXP choicepp_HYPER_choice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP, SEXP randomSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< bool >::type random(randomSEXP);
+    rcpp_result_gen = Rcpp::wrap(HYPER_choice(par, problems, type, random));
+    return rcpp_result_gen;
+END_RCPP
+}
+// HYPER_rndchoice
+std::vector<int> HYPER_rndchoice(std::vector<double> par, NumericMatrix problems, int type);
+RcppExport SEXP choicepp_HYPER_rndchoice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(HYPER_rndchoice(par, problems, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// HYPER_prob
+std::vector<double> HYPER_prob(std::vector<double> par, NumericMatrix problems, int type);
+RcppExport SEXP choicepp_HYPER_prob(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(HYPER_prob(par, problems, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// itch_4
+double itch_4(NumericVector problem, std::vector<double> par);
+RcppExport SEXP choicepp_itch_4(SEXP problemSEXP, SEXP parSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type problem(problemSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    rcpp_result_gen = Rcpp::wrap(itch_4(problem, par));
+    return rcpp_result_gen;
+END_RCPP
+}
+// itch_5
+double itch_5(NumericVector problem, std::vector<double> par);
+RcppExport SEXP choicepp_itch_5(SEXP problemSEXP, SEXP parSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type problem(problemSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    rcpp_result_gen = Rcpp::wrap(itch_5(problem, par));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ITCH_pgen
+NumericMatrix ITCH_pgen(NumericMatrix problems);
+RcppExport SEXP choicepp_ITCH_pgen(SEXP problemsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    rcpp_result_gen = Rcpp::wrap(ITCH_pgen(problems));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ITCH_lik
+double ITCH_lik(std::vector<double> par, NumericMatrix problems, std::vector<int> choices, double epsilon, int type);
+RcppExport SEXP choicepp_ITCH_lik(SEXP parSEXP, SEXP problemsSEXP, SEXP choicesSEXP, SEXP epsilonSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< std::vector<int> >::type choices(choicesSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(ITCH_lik(par, problems, choices, epsilon, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ITCH_choice
+std::vector<int> ITCH_choice(std::vector<double> par, NumericMatrix problems, int type, bool random);
+RcppExport SEXP choicepp_ITCH_choice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP, SEXP randomSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< bool >::type random(randomSEXP);
+    rcpp_result_gen = Rcpp::wrap(ITCH_choice(par, problems, type, random));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ITCH_rndchoice
+std::vector<int> ITCH_rndchoice(std::vector<double> par, NumericMatrix problems, int type);
+RcppExport SEXP choicepp_ITCH_rndchoice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(ITCH_rndchoice(par, problems, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ITCH_prob
+std::vector<double> ITCH_prob(std::vector<double> par, NumericMatrix problems, int type);
+RcppExport SEXP choicepp_ITCH_prob(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(ITCH_prob(par, problems, type));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -302,6 +433,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// nm_long
+double nm_long(std::vector<double> opt, std::vector<double> out, bool extr);
+RcppExport SEXP choicepp_nm_long(SEXP optSEXP, SEXP outSEXP, SEXP extrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type out(outSEXP);
+    Rcpp::traits::input_parameter< bool >::type extr(extrSEXP);
+    rcpp_result_gen = Rcpp::wrap(nm_long(opt, out, extr));
+    return rcpp_result_gen;
+END_RCPP
+}
 // nm_rand
 int nm_rand(GenericVector oo, double phi);
 RcppExport SEXP choicepp_nm_rand(SEXP ooSEXP, SEXP phiSEXP) {
@@ -311,6 +455,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< GenericVector >::type oo(ooSEXP);
     Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
     rcpp_result_gen = Rcpp::wrap(nm_rand(oo, phi));
+    return rcpp_result_gen;
+END_RCPP
+}
+// nms
+NumericVector nms(GenericVector ss, double phi);
+RcppExport SEXP choicepp_nms(SEXP ssSEXP, SEXP phiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type ss(ssSEXP);
+    Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
+    rcpp_result_gen = Rcpp::wrap(nms(ss, phi));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -327,18 +483,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// nms
-NumericVector nms(GenericVector ss, double phi);
-RcppExport SEXP choicepp_nms(SEXP ssSEXP, SEXP phiSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< GenericVector >::type ss(ssSEXP);
-    Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
-    rcpp_result_gen = Rcpp::wrap(nms(ss, phi));
-    return rcpp_result_gen;
-END_RCPP
-}
 // nms_rec
 NumericVector nms_rec(GenericVector ss, double phi, std::vector<int> ignore);
 RcppExport SEXP choicepp_nms_rec(SEXP ssSEXP, SEXP phiSEXP, SEXP ignoreSEXP) {
@@ -349,6 +493,47 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
     Rcpp::traits::input_parameter< std::vector<int> >::type ignore(ignoreSEXP);
     rcpp_result_gen = Rcpp::wrap(nms_rec(ss, phi, ignore));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rw
+double rw(std::vector<double> opt, std::vector<double> out, bool extr);
+RcppExport SEXP choicepp_rw(SEXP optSEXP, SEXP outSEXP, SEXP extrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type out(outSEXP);
+    Rcpp::traits::input_parameter< bool >::type extr(extrSEXP);
+    rcpp_result_gen = Rcpp::wrap(rw(opt, out, extr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dbinomC200
+double dbinomC200(int k, int n, double p);
+RcppExport SEXP choicepp_dbinomC200(SEXP kSEXP, SEXP nSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(dbinomC200(k, n, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dbinomC
+double dbinomC(int k, int n, double p, int nlookup, double root);
+RcppExport SEXP choicepp_dbinomC(SEXP kSEXP, SEXP nSEXP, SEXP pSEXP, SEXP nlookupSEXP, SEXP rootSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< int >::type nlookup(nlookupSEXP);
+    Rcpp::traits::input_parameter< double >::type root(rootSEXP);
+    rcpp_result_gen = Rcpp::wrap(dbinomC(k, n, p, nlookup, root));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -412,6 +597,213 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// pgen_dd
+NumericMatrix pgen_dd(int n_problem, double o_lower, double o_upper, double d_lower, double d_upper);
+RcppExport SEXP choicepp_pgen_dd(SEXP n_problemSEXP, SEXP o_lowerSEXP, SEXP o_upperSEXP, SEXP d_lowerSEXP, SEXP d_upperSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n_problem(n_problemSEXP);
+    Rcpp::traits::input_parameter< double >::type o_lower(o_lowerSEXP);
+    Rcpp::traits::input_parameter< double >::type o_upper(o_upperSEXP);
+    Rcpp::traits::input_parameter< double >::type d_lower(d_lowerSEXP);
+    Rcpp::traits::input_parameter< double >::type d_upper(d_upperSEXP);
+    rcpp_result_gen = Rcpp::wrap(pgen_dd(n_problem, o_lower, o_upper, d_lower, d_upper));
+    return rcpp_result_gen;
+END_RCPP
+}
+// reduce_option
+NumericVector reduce_option(NumericVector opt, bool has_n);
+RcppExport SEXP choicepp_reduce_option(SEXP optSEXP, SEXP has_nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< bool >::type has_n(has_nSEXP);
+    rcpp_result_gen = Rcpp::wrap(reduce_option(opt, has_n));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sort_by_p
+std::vector<double> sort_by_p(NumericVector opt, bool has_n);
+RcppExport SEXP choicepp_sort_by_p(SEXP optSEXP, SEXP has_nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< bool >::type has_n(has_nSEXP);
+    rcpp_result_gen = Rcpp::wrap(sort_by_p(opt, has_n));
+    return rcpp_result_gen;
+END_RCPP
+}
+// bayes_mean
+int bayes_mean(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_bayes_mean(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(bayes_mean(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// natural_mean
+int natural_mean(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_natural_mean(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(natural_mean(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// equiprobable
+int equiprobable(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_equiprobable(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(equiprobable(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// minimax
+int minimax(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_minimax(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(minimax(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// maximax
+int maximax(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_maximax(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(maximax(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// minimax_regret
+int minimax_regret(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_minimax_regret(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(minimax_regret(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// payoffelimination
+int payoffelimination(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_payoffelimination(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(payoffelimination(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// betterthanaverage
+int betterthanaverage(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_betterthanaverage(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(betterthanaverage(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mostlikely
+int mostlikely(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_mostlikely(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(mostlikely(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// leastlikely
+int leastlikely(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_leastlikely(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(leastlikely(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// probable
+int probable(NumericVector opt_A, NumericVector opt_B, double p_limit);
+RcppExport SEXP choicepp_probable(SEXP opt_ASEXP, SEXP opt_BSEXP, SEXP p_limitSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    Rcpp::traits::input_parameter< double >::type p_limit(p_limitSEXP);
+    rcpp_result_gen = Rcpp::wrap(probable(opt_A, opt_B, p_limit));
+    return rcpp_result_gen;
+END_RCPP
+}
+// exppayoffelimination
+int exppayoffelimination(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_exppayoffelimination(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(exppayoffelimination(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lexicographic
+int lexicographic(NumericVector opt_A, NumericVector opt_B);
+RcppExport SEXP choicepp_lexicographic(SEXP opt_ASEXP, SEXP opt_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt_A(opt_ASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt_B(opt_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(lexicographic(opt_A, opt_B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// toolbox
+NumericMatrix toolbox(GenericVector prob);
+RcppExport SEXP choicepp_toolbox(SEXP probSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type prob(probSEXP);
+    rcpp_result_gen = Rcpp::wrap(toolbox(prob));
+    return rcpp_result_gen;
+END_RCPP
+}
 // submean
 double submean(std::vector<double> x, int a, int b);
 RcppExport SEXP choicepp_submean(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
@@ -462,26 +854,30 @@ BEGIN_RCPP
 END_RCPP
 }
 // edit2
-std::vector<double> edit2(std::vector<double> ss, NumericVector opt);
-RcppExport SEXP choicepp_edit2(SEXP ssSEXP, SEXP optSEXP) {
+std::vector<double> edit2(std::vector<double> ss, NumericVector opt, bool add_n, bool do_arrange);
+RcppExport SEXP choicepp_edit2(SEXP ssSEXP, SEXP optSEXP, SEXP add_nSEXP, SEXP do_arrangeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::vector<double> >::type ss(ssSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type opt(optSEXP);
-    rcpp_result_gen = Rcpp::wrap(edit2(ss, opt));
+    Rcpp::traits::input_parameter< bool >::type add_n(add_nSEXP);
+    Rcpp::traits::input_parameter< bool >::type do_arrange(do_arrangeSEXP);
+    rcpp_result_gen = Rcpp::wrap(edit2(ss, opt, add_n, do_arrange));
     return rcpp_result_gen;
 END_RCPP
 }
 // edit_exp
-GenericVector edit_exp(GenericVector ss, GenericVector prob);
-RcppExport SEXP choicepp_edit_exp(SEXP ssSEXP, SEXP probSEXP) {
+GenericVector edit_exp(GenericVector ss, GenericVector prob, bool add_n, bool do_arrange);
+RcppExport SEXP choicepp_edit_exp(SEXP ssSEXP, SEXP probSEXP, SEXP add_nSEXP, SEXP do_arrangeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< GenericVector >::type ss(ssSEXP);
     Rcpp::traits::input_parameter< GenericVector >::type prob(probSEXP);
-    rcpp_result_gen = Rcpp::wrap(edit_exp(ss, prob));
+    Rcpp::traits::input_parameter< bool >::type add_n(add_nSEXP);
+    Rcpp::traits::input_parameter< bool >::type do_arrange(do_arrangeSEXP);
+    rcpp_result_gen = Rcpp::wrap(edit_exp(ss, prob, add_n, do_arrange));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -662,6 +1058,112 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type gamma_compl(gamma_complSEXP);
     Rcpp::traits::input_parameter< double >::type gamma_incompl(gamma_incomplSEXP);
     rcpp_result_gen = Rcpp::wrap(sampl_complete2(prob, gamma_compl, gamma_incompl));
+    return rcpp_result_gen;
+END_RCPP
+}
+// u
+double u(double o, double alpha);
+RcppExport SEXP choicepp_u(SEXP oSEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type o(oSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(u(o, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
+// t_tax
+double t_tax(double p, double gamma);
+RcppExport SEXP choicepp_t_tax(SEXP pSEXP, SEXP gammaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(t_tax(p, gamma));
+    return rcpp_result_gen;
+END_RCPP
+}
+// w
+double w(double pi, double pk, double delta, double gamma, double n);
+RcppExport SEXP choicepp_w(SEXP piSEXP, SEXP pkSEXP, SEXP deltaSEXP, SEXP gammaSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type pi(piSEXP);
+    Rcpp::traits::input_parameter< double >::type pk(pkSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(w(pi, pk, delta, gamma, n));
+    return rcpp_result_gen;
+END_RCPP
+}
+// utility_tax
+double utility_tax(NumericVector opt, std::vector<double> par, int type);
+RcppExport SEXP choicepp_utility_tax(SEXP optSEXP, SEXP parSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(utility_tax(opt, par, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// tax_prob
+std::vector<double> tax_prob(std::vector<double> par, GenericVector problems, int type);
+RcppExport SEXP choicepp_tax_prob(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(tax_prob(par, problems, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// tax_lik
+double tax_lik(std::vector<double> par, GenericVector problems, std::vector<int> choices, int type, double limit);
+RcppExport SEXP choicepp_tax_lik(SEXP parSEXP, SEXP problemsSEXP, SEXP choicesSEXP, SEXP typeSEXP, SEXP limitSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< std::vector<int> >::type choices(choicesSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< double >::type limit(limitSEXP);
+    rcpp_result_gen = Rcpp::wrap(tax_lik(par, problems, choices, type, limit));
+    return rcpp_result_gen;
+END_RCPP
+}
+// tax_choice
+std::vector<int> tax_choice(std::vector<double> par, GenericVector problems, int type);
+RcppExport SEXP choicepp_tax_choice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(tax_choice(par, problems, type));
+    return rcpp_result_gen;
+END_RCPP
+}
+// tax_rndchoice
+std::vector<int> tax_rndchoice(std::vector<double> par, GenericVector problems, int type);
+RcppExport SEXP choicepp_tax_rndchoice(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    rcpp_result_gen = Rcpp::wrap(tax_rndchoice(par, problems, type));
     return rcpp_result_gen;
 END_RCPP
 }

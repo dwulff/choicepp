@@ -19,4 +19,3 @@ a list of samples.
 \code{sampl_n} draws a fixed number of samples for each option in the
   set of problems.
 }
-

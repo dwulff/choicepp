@@ -21,4 +21,3 @@ a vector of choices
 \code{tax_rndchoice} produces probabilistic choices for a set of choice
   problems and parameters.
 }
-

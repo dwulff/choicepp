@@ -30,4 +30,3 @@ a list of witch each element containing the samples for option
   across both options. The expected number of outcomes is drawn from the
   distribution of number of outcomes across the entire problem set.
 }
-
