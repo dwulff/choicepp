@@ -509,6 +509,51 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// si
+double si(std::vector<double> opt, std::vector<double> out, double w, bool extr, bool verbose);
+RcppExport SEXP choicepp_si(SEXP optSEXP, SEXP outSEXP, SEXP wSEXP, SEXP extrSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type out(outSEXP);
+    Rcpp::traits::input_parameter< double >::type w(wSEXP);
+    Rcpp::traits::input_parameter< bool >::type extr(extrSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(si(opt, out, w, extr, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// si2
+double si2(std::vector<double> opt, std::vector<double> out, double w, bool extr, bool verbose);
+RcppExport SEXP choicepp_si2(SEXP optSEXP, SEXP outSEXP, SEXP wSEXP, SEXP extrSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type out(outSEXP);
+    Rcpp::traits::input_parameter< double >::type w(wSEXP);
+    Rcpp::traits::input_parameter< bool >::type extr(extrSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(si2(opt, out, w, extr, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// si3
+double si3(std::vector<double> opt, std::vector<double> out, double w, bool extr, bool verbose);
+RcppExport SEXP choicepp_si3(SEXP optSEXP, SEXP outSEXP, SEXP wSEXP, SEXP extrSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type out(outSEXP);
+    Rcpp::traits::input_parameter< double >::type w(wSEXP);
+    Rcpp::traits::input_parameter< bool >::type extr(extrSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(si3(opt, out, w, extr, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
 // dbinomC200
 double dbinomC200(int k, int n, double p);
 RcppExport SEXP choicepp_dbinomC200(SEXP kSEXP, SEXP nSEXP, SEXP pSEXP) {
@@ -1166,4 +1211,105 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(tax_rndchoice(par, problems, type));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"choicepp_pevbyn_nm", (DL_FUNC) &choicepp_pevbyn_nm, 2},
+    {"choicepp_v", (DL_FUNC) &choicepp_v, 4},
+    {"choicepp_v_wrapper", (DL_FUNC) &choicepp_v_wrapper, 3},
+    {"choicepp_w_tk", (DL_FUNC) &choicepp_w_tk, 4},
+    {"choicepp_w_ge", (DL_FUNC) &choicepp_w_ge, 6},
+    {"choicepp_w_p", (DL_FUNC) &choicepp_w_p, 6},
+    {"choicepp_w_wrapper", (DL_FUNC) &choicepp_w_wrapper, 4},
+    {"choicepp_utility", (DL_FUNC) &choicepp_utility, 3},
+    {"choicepp_choice_rule", (DL_FUNC) &choicepp_choice_rule, 3},
+    {"choicepp_cpt_prob", (DL_FUNC) &choicepp_cpt_prob, 3},
+    {"choicepp_cpt_lik", (DL_FUNC) &choicepp_cpt_lik, 5},
+    {"choicepp_cpt_choice", (DL_FUNC) &choicepp_cpt_choice, 3},
+    {"choicepp_cpt_rndchoice", (DL_FUNC) &choicepp_cpt_rndchoice, 3},
+    {"choicepp_cpt_rndchoice_cert", (DL_FUNC) &choicepp_cpt_rndchoice_cert, 3},
+    {"choicepp_expo_rule", (DL_FUNC) &choicepp_expo_rule, 2},
+    {"choicepp_homo_rule", (DL_FUNC) &choicepp_homo_rule, 3},
+    {"choicepp_EXPO_lik", (DL_FUNC) &choicepp_EXPO_lik, 5},
+    {"choicepp_EXPO_choice", (DL_FUNC) &choicepp_EXPO_choice, 4},
+    {"choicepp_EXPO_rndchoice", (DL_FUNC) &choicepp_EXPO_rndchoice, 3},
+    {"choicepp_EXPO_prob", (DL_FUNC) &choicepp_EXPO_prob, 3},
+    {"choicepp_HYPER_lik", (DL_FUNC) &choicepp_HYPER_lik, 5},
+    {"choicepp_HYPER_choice", (DL_FUNC) &choicepp_HYPER_choice, 4},
+    {"choicepp_HYPER_rndchoice", (DL_FUNC) &choicepp_HYPER_rndchoice, 3},
+    {"choicepp_HYPER_prob", (DL_FUNC) &choicepp_HYPER_prob, 3},
+    {"choicepp_itch_4", (DL_FUNC) &choicepp_itch_4, 2},
+    {"choicepp_itch_5", (DL_FUNC) &choicepp_itch_5, 2},
+    {"choicepp_ITCH_pgen", (DL_FUNC) &choicepp_ITCH_pgen, 1},
+    {"choicepp_ITCH_lik", (DL_FUNC) &choicepp_ITCH_lik, 5},
+    {"choicepp_ITCH_choice", (DL_FUNC) &choicepp_ITCH_choice, 4},
+    {"choicepp_ITCH_rndchoice", (DL_FUNC) &choicepp_ITCH_rndchoice, 3},
+    {"choicepp_ITCH_prob", (DL_FUNC) &choicepp_ITCH_prob, 3},
+    {"choicepp_nm", (DL_FUNC) &choicepp_nm, 1},
+    {"choicepp_nm_long", (DL_FUNC) &choicepp_nm_long, 3},
+    {"choicepp_nm_rand", (DL_FUNC) &choicepp_nm_rand, 2},
+    {"choicepp_nms", (DL_FUNC) &choicepp_nms, 2},
+    {"choicepp_nm_rec_rand", (DL_FUNC) &choicepp_nm_rec_rand, 3},
+    {"choicepp_nms_rec", (DL_FUNC) &choicepp_nms_rec, 3},
+    {"choicepp_rw", (DL_FUNC) &choicepp_rw, 3},
+    {"choicepp_si", (DL_FUNC) &choicepp_si, 5},
+    {"choicepp_si2", (DL_FUNC) &choicepp_si2, 5},
+    {"choicepp_si3", (DL_FUNC) &choicepp_si3, 5},
+    {"choicepp_dbinomC200", (DL_FUNC) &choicepp_dbinomC200, 3},
+    {"choicepp_dbinomC", (DL_FUNC) &choicepp_dbinomC, 5},
+    {"choicepp_stdom1", (DL_FUNC) &choicepp_stdom1, 4},
+    {"choicepp_stdom2", (DL_FUNC) &choicepp_stdom2, 5},
+    {"choicepp_pgen_rnd", (DL_FUNC) &choicepp_pgen_rnd, 9},
+    {"choicepp_p_arrange", (DL_FUNC) &choicepp_p_arrange, 2},
+    {"choicepp_pgen_dd", (DL_FUNC) &choicepp_pgen_dd, 5},
+    {"choicepp_reduce_option", (DL_FUNC) &choicepp_reduce_option, 2},
+    {"choicepp_sort_by_p", (DL_FUNC) &choicepp_sort_by_p, 2},
+    {"choicepp_bayes_mean", (DL_FUNC) &choicepp_bayes_mean, 2},
+    {"choicepp_natural_mean", (DL_FUNC) &choicepp_natural_mean, 2},
+    {"choicepp_equiprobable", (DL_FUNC) &choicepp_equiprobable, 2},
+    {"choicepp_minimax", (DL_FUNC) &choicepp_minimax, 2},
+    {"choicepp_maximax", (DL_FUNC) &choicepp_maximax, 2},
+    {"choicepp_minimax_regret", (DL_FUNC) &choicepp_minimax_regret, 2},
+    {"choicepp_payoffelimination", (DL_FUNC) &choicepp_payoffelimination, 2},
+    {"choicepp_betterthanaverage", (DL_FUNC) &choicepp_betterthanaverage, 2},
+    {"choicepp_mostlikely", (DL_FUNC) &choicepp_mostlikely, 2},
+    {"choicepp_leastlikely", (DL_FUNC) &choicepp_leastlikely, 2},
+    {"choicepp_probable", (DL_FUNC) &choicepp_probable, 3},
+    {"choicepp_exppayoffelimination", (DL_FUNC) &choicepp_exppayoffelimination, 2},
+    {"choicepp_lexicographic", (DL_FUNC) &choicepp_lexicographic, 2},
+    {"choicepp_toolbox", (DL_FUNC) &choicepp_toolbox, 1},
+    {"choicepp_submean", (DL_FUNC) &choicepp_submean, 3},
+    {"choicepp_recency_wos", (DL_FUNC) &choicepp_recency_wos, 2},
+    {"choicepp_recency", (DL_FUNC) &choicepp_recency, 2},
+    {"choicepp_edit1", (DL_FUNC) &choicepp_edit1, 2},
+    {"choicepp_edit2", (DL_FUNC) &choicepp_edit2, 4},
+    {"choicepp_edit_exp", (DL_FUNC) &choicepp_edit_exp, 4},
+    {"choicepp_smpl", (DL_FUNC) &choicepp_smpl, 1},
+    {"choicepp_smpl_f", (DL_FUNC) &choicepp_smpl_f, 1},
+    {"choicepp_smpl_n", (DL_FUNC) &choicepp_smpl_n, 2},
+    {"choicepp_sampl_n", (DL_FUNC) &choicepp_sampl_n, 2},
+    {"choicepp_smpl_easy", (DL_FUNC) &choicepp_smpl_easy, 5},
+    {"choicepp_sampl_easy", (DL_FUNC) &choicepp_sampl_easy, 4},
+    {"choicepp_smpl_even", (DL_FUNC) &choicepp_smpl_even, 4},
+    {"choicepp_sampl_even", (DL_FUNC) &choicepp_sampl_even, 3},
+    {"choicepp_get_nout", (DL_FUNC) &choicepp_get_nout, 1},
+    {"choicepp_get_minn", (DL_FUNC) &choicepp_get_minn, 1},
+    {"choicepp_smpl_complete", (DL_FUNC) &choicepp_smpl_complete, 5},
+    {"choicepp_smpl_complete2", (DL_FUNC) &choicepp_smpl_complete2, 5},
+    {"choicepp_sampl_complete", (DL_FUNC) &choicepp_sampl_complete, 3},
+    {"choicepp_sampl_complete2", (DL_FUNC) &choicepp_sampl_complete2, 3},
+    {"choicepp_u", (DL_FUNC) &choicepp_u, 2},
+    {"choicepp_t_tax", (DL_FUNC) &choicepp_t_tax, 2},
+    {"choicepp_w", (DL_FUNC) &choicepp_w, 5},
+    {"choicepp_utility_tax", (DL_FUNC) &choicepp_utility_tax, 3},
+    {"choicepp_tax_prob", (DL_FUNC) &choicepp_tax_prob, 3},
+    {"choicepp_tax_lik", (DL_FUNC) &choicepp_tax_lik, 5},
+    {"choicepp_tax_choice", (DL_FUNC) &choicepp_tax_choice, 3},
+    {"choicepp_tax_rndchoice", (DL_FUNC) &choicepp_tax_rndchoice, 3},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_choicepp(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

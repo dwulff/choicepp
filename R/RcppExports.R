@@ -919,6 +919,27 @@ rw <- function(opt, out, extr = FALSE) {
     .Call('choicepp_rw', PACKAGE = 'choicepp', opt, out, extr)
 }
 
+#' Compute round wise
+#'
+#' @export
+si <- function(opt, out, w, extr = FALSE, verbose = FALSE) {
+    .Call('choicepp_si', PACKAGE = 'choicepp', opt, out, w, extr, verbose)
+}
+
+#' Compute round wise
+#'
+#' @export
+si2 <- function(opt, out, w, extr = FALSE, verbose = FALSE) {
+    .Call('choicepp_si2', PACKAGE = 'choicepp', opt, out, w, extr, verbose)
+}
+
+#' Compute round wise
+#'
+#' @export
+si3 <- function(opt, out, w, extr = FALSE, verbose = FALSE) {
+    .Call('choicepp_si3', PACKAGE = 'choicepp', opt, out, w, extr, verbose)
+}
+
 dbinomC200 <- function(k, n, p) {
     .Call('choicepp_dbinomC200', PACKAGE = 'choicepp', k, n, p)
 }
