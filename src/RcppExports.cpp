@@ -849,6 +849,125 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rnorm_cpp
+double rnorm_cpp(double mu, double sigma);
+RcppExport SEXP choicepp_rnorm_cpp(SEXP muSEXP, SEXP sigmaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type mu(muSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
+    rcpp_result_gen = Rcpp::wrap(rnorm_cpp(mu, sigma));
+    return rcpp_result_gen;
+END_RCPP
+}
+// arrange_pos
+std::vector<double> arrange_pos(std::vector<double> opt);
+RcppExport SEXP choicepp_arrange_pos(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(arrange_pos(opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// edit_pos
+std::vector<double> edit_pos(std::vector<double> ss, NumericVector opt, bool add_n, bool do_arrange);
+RcppExport SEXP choicepp_edit_pos(SEXP ssSEXP, SEXP optSEXP, SEXP add_nSEXP, SEXP do_arrangeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type ss(ssSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< bool >::type add_n(add_nSEXP);
+    Rcpp::traits::input_parameter< bool >::type do_arrange(do_arrangeSEXP);
+    rcpp_result_gen = Rcpp::wrap(edit_pos(ss, opt, add_n, do_arrange));
+    return rcpp_result_gen;
+END_RCPP
+}
+// edit_exp_pos
+GenericVector edit_exp_pos(GenericVector ss, GenericVector prob, bool add_n, bool do_arrange);
+RcppExport SEXP choicepp_edit_exp_pos(SEXP ssSEXP, SEXP probSEXP, SEXP add_nSEXP, SEXP do_arrangeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type ss(ssSEXP);
+    Rcpp::traits::input_parameter< GenericVector >::type prob(probSEXP);
+    Rcpp::traits::input_parameter< bool >::type add_n(add_nSEXP);
+    Rcpp::traits::input_parameter< bool >::type do_arrange(do_arrangeSEXP);
+    rcpp_result_gen = Rcpp::wrap(edit_exp_pos(ss, prob, add_n, do_arrange));
+    return rcpp_result_gen;
+END_RCPP
+}
+// utility_pos
+double utility_pos(NumericVector opt, std::vector<double> par, int type, double noise_level, double recency);
+RcppExport SEXP choicepp_utility_pos(SEXP optSEXP, SEXP parSEXP, SEXP typeSEXP, SEXP noise_levelSEXP, SEXP recencySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< double >::type noise_level(noise_levelSEXP);
+    Rcpp::traits::input_parameter< double >::type recency(recencySEXP);
+    rcpp_result_gen = Rcpp::wrap(utility_pos(opt, par, type, noise_level, recency));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpt_choice_pos
+std::vector<int> cpt_choice_pos(std::vector<double> par, GenericVector problems, int type, double noise_level, double recency);
+RcppExport SEXP choicepp_cpt_choice_pos(SEXP parSEXP, SEXP problemsSEXP, SEXP typeSEXP, SEXP noise_levelSEXP, SEXP recencySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<double> >::type par(parSEXP);
+    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< double >::type noise_level(noise_levelSEXP);
+    Rcpp::traits::input_parameter< double >::type recency(recencySEXP);
+    rcpp_result_gen = Rcpp::wrap(cpt_choice_pos(par, problems, type, noise_level, recency));
+    return rcpp_result_gen;
+END_RCPP
+}
+// getSD
+NumericVector getSD(GenericVector ss);
+RcppExport SEXP choicepp_getSD(SEXP ssSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type ss(ssSEXP);
+    rcpp_result_gen = Rcpp::wrap(getSD(ss));
+    return rcpp_result_gen;
+END_RCPP
+}
+// addNoise
+NumericMatrix addNoise(GenericVector problems, std::vector<double> sds, double k);
+RcppExport SEXP choicepp_addNoise(SEXP problemsSEXP, SEXP sdsSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type sds(sdsSEXP);
+    Rcpp::traits::input_parameter< double >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(addNoise(problems, sds, k));
+    return rcpp_result_gen;
+END_RCPP
+}
+// addPositionWeighting
+NumericMatrix addPositionWeighting(GenericVector problems, double phi, std::vector<double> sds, double k);
+RcppExport SEXP choicepp_addPositionWeighting(SEXP problemsSEXP, SEXP phiSEXP, SEXP sdsSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< GenericVector >::type problems(problemsSEXP);
+    Rcpp::traits::input_parameter< double >::type phi(phiSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type sds(sdsSEXP);
+    Rcpp::traits::input_parameter< double >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(addPositionWeighting(problems, phi, sds, k));
+    return rcpp_result_gen;
+END_RCPP
+}
 // submean
 double submean(std::vector<double> x, int a, int b);
 RcppExport SEXP choicepp_submean(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
@@ -886,21 +1005,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// edit1
-std::vector<double> edit1(std::vector<double> ss, int size);
-RcppExport SEXP choicepp_edit1(SEXP ssSEXP, SEXP sizeSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::vector<double> >::type ss(ssSEXP);
-    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(edit1(ss, size));
-    return rcpp_result_gen;
-END_RCPP
-}
-// edit2
-std::vector<double> edit2(std::vector<double> ss, NumericVector opt, bool add_n, bool do_arrange);
-RcppExport SEXP choicepp_edit2(SEXP ssSEXP, SEXP optSEXP, SEXP add_nSEXP, SEXP do_arrangeSEXP) {
+// edit
+std::vector<double> edit(std::vector<double> ss, NumericVector opt, bool add_n, bool do_arrange);
+RcppExport SEXP choicepp_edit(SEXP ssSEXP, SEXP optSEXP, SEXP add_nSEXP, SEXP do_arrangeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -908,7 +1015,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type opt(optSEXP);
     Rcpp::traits::input_parameter< bool >::type add_n(add_nSEXP);
     Rcpp::traits::input_parameter< bool >::type do_arrange(do_arrangeSEXP);
-    rcpp_result_gen = Rcpp::wrap(edit2(ss, opt, add_n, do_arrange));
+    rcpp_result_gen = Rcpp::wrap(edit(ss, opt, add_n, do_arrange));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1278,11 +1385,19 @@ static const R_CallMethodDef CallEntries[] = {
     {"choicepp_exppayoffelimination", (DL_FUNC) &choicepp_exppayoffelimination, 2},
     {"choicepp_lexicographic", (DL_FUNC) &choicepp_lexicographic, 2},
     {"choicepp_toolbox", (DL_FUNC) &choicepp_toolbox, 1},
+    {"choicepp_rnorm_cpp", (DL_FUNC) &choicepp_rnorm_cpp, 2},
+    {"choicepp_arrange_pos", (DL_FUNC) &choicepp_arrange_pos, 1},
+    {"choicepp_edit_pos", (DL_FUNC) &choicepp_edit_pos, 4},
+    {"choicepp_edit_exp_pos", (DL_FUNC) &choicepp_edit_exp_pos, 4},
+    {"choicepp_utility_pos", (DL_FUNC) &choicepp_utility_pos, 5},
+    {"choicepp_cpt_choice_pos", (DL_FUNC) &choicepp_cpt_choice_pos, 5},
+    {"choicepp_getSD", (DL_FUNC) &choicepp_getSD, 1},
+    {"choicepp_addNoise", (DL_FUNC) &choicepp_addNoise, 3},
+    {"choicepp_addPositionWeighting", (DL_FUNC) &choicepp_addPositionWeighting, 4},
     {"choicepp_submean", (DL_FUNC) &choicepp_submean, 3},
     {"choicepp_recency_wos", (DL_FUNC) &choicepp_recency_wos, 2},
     {"choicepp_recency", (DL_FUNC) &choicepp_recency, 2},
-    {"choicepp_edit1", (DL_FUNC) &choicepp_edit1, 2},
-    {"choicepp_edit2", (DL_FUNC) &choicepp_edit2, 4},
+    {"choicepp_edit", (DL_FUNC) &choicepp_edit, 4},
     {"choicepp_edit_exp", (DL_FUNC) &choicepp_edit_exp, 4},
     {"choicepp_smpl", (DL_FUNC) &choicepp_smpl, 1},
     {"choicepp_smpl_f", (DL_FUNC) &choicepp_smpl_f, 1},

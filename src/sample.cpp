@@ -10,37 +10,15 @@ using namespace Rcpp;
 //////////////////////////////////////////////////////////////////////////////
 
 // [[Rcpp::export]]
-std::vector<double> edit1(std::vector<double> ss, int size = 0){
+std::vector<double> edit(std::vector<double> ss,
+                         NumericVector opt,
+                         bool add_n = false,
+                         bool do_arrange = true){
   std::map<double, double> tab;
   double unit = 1.0 / ss.size();
-  for(int i = 0; i < ss.size(); i++){
-    double o = ss[i];
-    std::map<double, double>::const_iterator got = tab.find(o);
-    if( got == tab.end() ){
-      tab[o] = unit;
-    } else {
-      tab[o] += unit;
-    }
-  }
-  int add = 0;
-  if(size > tab.size()) add = size - tab.size();
-  std::vector<double> ed_opt;
-  std::map<double, double>::const_iterator it;
-  for(it = tab.begin(); it != tab.end(); ++it) ed_opt.push_back(it->first);
-  for(int i = 0; i < add; i++) ed_opt.push_back(0);
-  for(it = tab.begin(); it != tab.end(); ++it) ed_opt.push_back(it->second);
-  for(int i = 0; i < add; i++) ed_opt.push_back(0);
-  return arrange(ed_opt);
-}
-
-
-// [[Rcpp::export]]
-std::vector<double> edit2(std::vector<double> ss, NumericVector opt, bool add_n = false, bool do_arrange = true){
-  std::map<double, double> tab;
-  double unit = 1.0 / ss.size();
-  int no = std::floor(opt.size()/2);
+  int no = std::floor(opt.size()/2), n = ss.size();
   for(int i = 0; i < no; i++) tab[opt[i]] = 0;
-  for(int i = 0; i < ss.size(); i++){
+  for(int i = 0; i < n; i++){
     double o = ss[i];
     tab[o] += unit;
     }
@@ -52,14 +30,11 @@ std::vector<double> edit2(std::vector<double> ss, NumericVector opt, bool add_n 
   for(int i = 0; i < add; i++) ed_opt.push_back(0);
   for(it = tab.begin(); it != tab.end(); ++it) ed_opt.push_back(it->second);
   for(int i = 0; i < add; i++) ed_opt.push_back(0);
-  if(do_arrange == true){
-    std::vector<double> arr_opt = arrange(ed_opt);
-    if(add_n == true) arr_opt.push_back(ss.size());
-    return arr_opt;
-    } else {
-    if(add_n == true) ed_opt.push_back(ss.size());
-    return ed_opt;
-    }
+
+  if(do_arrange == true) ed_opt = arrange(ed_opt);
+  if(add_n == true) ed_opt.push_back(ss.size());
+
+  return ed_opt;
   }
 
 
@@ -77,27 +52,33 @@ std::vector<double> edit2(std::vector<double> ss, NumericVector opt, bool add_n 
 //'
 //' @export
 // [[Rcpp::export]]
-GenericVector edit_exp(GenericVector ss, GenericVector prob, bool add_n = false, bool do_arrange = true){
-  int add_col = 0;
-  if(add_n == true) add_col = 1;
+GenericVector edit_exp(GenericVector ss,
+                       GenericVector prob,
+                       bool add_n = false,
+                       bool do_arrange = true){
   NumericMatrix As = prob[0];
   NumericMatrix Bs = prob[1];
-  NumericMatrix As_n(As.nrow(),As.ncol() + add_col);
-  NumericMatrix Bs_n(Bs.nrow(),Bs.ncol() + add_col);
+  int add_col = 0;
+  if(add_n == true) add_col = 1;
+  int ncolA = As.ncol(), ncolB = Bs.ncol();
+  if(do_arrange == false) ncolA--;
+  if(do_arrange == false) ncolB--;
+  NumericMatrix As_n(As.nrow(),ncolA + add_col);
+  NumericMatrix Bs_n(Bs.nrow(),ncolB + add_col);
   int np = ss.size();
   for(int p = 0; p < np; p++){
     GenericVector oo = ss[p];
-    std::vector<double> edA = edit2(oo[0],As(p,_),add_n,do_arrange);
-    std::vector<double> edB = edit2(oo[1],Bs(p,_),add_n,do_arrange);
+    std::vector<double> edA = edit(oo[0],As(p,_),add_n,do_arrange);
+    std::vector<double> edB = edit(oo[1],Bs(p,_),add_n,do_arrange);
     int nA = edA.size(), nB = edB.size();
     for(int i = 0; i < nA; i++) As_n(p,i) = edA[i];
     for(int i = 0; i < nB; i++) Bs_n(p,i) = edB[i];
-  }
+    }
   GenericVector prob_n(2);
   prob_n[0] = As_n;
   prob_n[1] = Bs_n;
   return prob_n;
-}
+  }
 
 
 //////////////////////////////////////////////////////////////////////////////

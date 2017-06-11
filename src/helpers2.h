@@ -1,0 +1,13 @@
+#ifndef __UTILITIES2__
+#define __UTILITIES2__
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//    EDIT EXPERIENCE
+//
+//////////////////////////////////////////////////////////////////////////////
+
+std::vector<double> edit(std::vector<double> ss, Rcpp::NumericVector opt, bool add_n = false, bool do_arrange = true);
+
+#endif // __UTILITIES2__

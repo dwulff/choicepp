@@ -2,7 +2,6 @@
 #define __UTILITIES__
 
 
-
 //////////////////////////////////////////////////////////////////////////////
 //
 //    CPT FUNS
@@ -113,7 +112,8 @@ inline std::vector< std::pair<double, int> > mysort2(std::vector< std::pair<doub
   if(decreasing == true)  std::sort(pairs.begin(), pairs.end(), decrCompare);
   if(decreasing == false) std::sort(pairs.begin(), pairs.end(), incrCompare);
   return pairs;
-}
+  }
+
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -169,6 +169,8 @@ inline std::vector<double> arrange(std::vector<double> opt){
   all.push_back(minus.size());
   return all;
   }
+
+
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -291,5 +293,6 @@ inline double rootChooseLookup200(int n, int k){
 
 double dbinomC200(int k, int n, double p);
 double dbinomC(int k, int n, double p, int nlookup = 10000, double root = 200);
+
 
 #endif // __UTILITIES__
